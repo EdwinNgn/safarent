@@ -1,2 +1,8 @@
 <h1>Animals#show</h1>
 <p>Find me in app/views/animals/show.html.erb</p>
+<p><%= @animal.name %></p>
+<p><%= @animal.description %></p>
+<p><%= @animal.location %></p>
+
+
+<p> <%= link_to("edit", edit_animal_path(@animal)) %></p>

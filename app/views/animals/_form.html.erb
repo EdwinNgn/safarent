@@ -1,0 +1,9 @@
+<%= simple_form_for @animal do |f| %>
+  <%= f.input :name %>
+  <%= f.input :animal_type %>
+  <%= f.input :species %>
+  <%= f.input :description %>
+  <%= f.input :price_per_day %>
+  <%= f.input :location %>
+  <%= f.submit "create an animal"%>
+<% end %>

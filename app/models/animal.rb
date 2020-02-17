@@ -1,10 +1,10 @@
 class Animal < ApplicationRecord
-  validate :name, presence: true
-  validate :animal_type, presence: true
-  validate :price_per_day, presence: true
-  validate :location, presence: true
-  validate :species, presence: true
-  validate :description, presence: true
+  validates :name, presence: true
+  validates :animal_type, presence: true
+  validates :price_per_day, presence: true
+  validates :location, presence: true
+  validates :species, presence: true
+  validates :description, presence: true
   has_many :bookings
   has_many :reviews, through: :bookings
   belongs_to :user
