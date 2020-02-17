@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get 'bookings/new'
+  get 'reviews/new'
+  get 'animals/index'
+  get 'animals/show'
+  get 'animals/create'
+  get 'animals/new'
+  get 'animals/edit'
+  get 'animals/update'
+  get 'animals/destroy'
   devise_for :users
   root to: 'pages#home'
   resources :animals do
