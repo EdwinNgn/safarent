@@ -1,5 +1,4 @@
-<h1>Animals#index</h1>
-<p>Find me in app/views/animals/index.html.erb</p>
+<h1>Animals</h1>
 <% @animals.each do |animal| %>
   <p><%= animal.name %></p>
   <%= link_to("get more infor", animal_path(animal)) %>
