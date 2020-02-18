@@ -17,7 +17,7 @@ Review.destroy_all
 user = User.create(email: "test@gmail.com", password: "azertyuiop")
 #je ne crée que des chiens pour l'instant plus simple :)
 5.times do
-  user = User.create(email: Faker::Internet.email, password: Faker::Alphanumeric.alpha(number: 8))
+  user = User.create(email: Faker::Internet.email, last_name: Faker::Name.last_name,first_name: Faker::Name.first_name, password: Faker::Alphanumeric.alpha(number: 8))
   p user
   name = Faker::Creature::Dog.name
   animal_type = "dog"

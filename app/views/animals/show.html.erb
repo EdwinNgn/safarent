@@ -2,5 +2,13 @@
 <p><%= @animal.description %></p>
 <p><%= @animal.location %></p>
 
+<p> Owner:  <%= @animal.user.email %></p>
+<p> <%= link_to "see the owner", profil_path(@animal.user) %> </p>
+
+<%= @animal.photos %>
+<% @animal.photos.each do |photo| %>
+<%= photo.key %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
 
 <p> <%= link_to("edit", edit_animal_path(@animal)) %></p>
