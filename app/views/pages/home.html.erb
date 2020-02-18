@@ -2,10 +2,31 @@
 <p>Find me in app/views/pages/home.html.erb</p>
  -->
 
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://data.fou-de-puzzle.com/.5/bebes-animaux-de-la-jungle-300-pieces--puzzle.44184-1.fs.jpg);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1451587910776-e7c3c3a94441?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80);">
   <div class="container">
     <h1>Safarent bring <strong>exotic animals</strong> to <strong>wonderfull people</strong>!</h1>
-    <p>You can reserve when ever you want a beautiful exotic animal from other.</p>
-    <a class="btn btn-primary" href="#">Reserve now</a>
+    <p>You can book whenever you want a beautiful exotic animal from nice owners.</p>
+    <form id="search" class="form-inline form">
+      <div>
+        <p><label for="location">Location</label></p>
+        <input id="location" type="text" class="form-control ml-auto mr-2" placeholder="Lille">
+      </div>
+      <div>
+        <p><label for="start-date">Start Date</label></p>
+        <input id="start-date" type="date" class="form-control ml-auto mr-2" placeholder="start date">
+      </div>
+      <div>
+        <p><label for="end-date">End Date</label></p>
+        <input id="end-date" type="date" class="form-control ml-auto mr-2">
+      </div>
+      <div>
+        <p><label for="Submit">Click</label></p>
+        <input type="submit" class="btn btn-primary mr-auto ml-2" value="Search">
+      </div>
+    </form>
   </div>
 </div>
+
+
+
+
