@@ -1,8 +1,9 @@
-.navbar-home {
-  position: fixed;
+.navbar-lewagon {
+  justify-content: space-between;
+  background: transparent;
 }
 
-.navbar .navbar-collapse {
+.navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
@@ -10,6 +11,7 @@
   width: 40px;
 }
 
+// Cibler les fas dans la navbar
 .fas {
   font-size: 20px;
   padding: 5px;
@@ -19,3 +21,8 @@
   color: black;
 }
 
+.navbar-transparent {
+  position:         fixed;
+  background-color: transparent;
+  width:            100vw;
+}

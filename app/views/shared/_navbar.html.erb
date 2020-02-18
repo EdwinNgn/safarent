@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light d-flex justify-content-between <%= 'navbar-home' if params[:action] == "home" %>">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon d-flex justify-content-between <%= 'navbar-transparent' if params[:action] == "home" %>">
   <%= link_to root_path do %>
     <%= image_tag "logo-safarent", alt: "alttext", class: "logo-navbar" %>
   <% end %>
@@ -7,7 +7,7 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item active">
-          <%= link_to "Home", root_path, class:"nav-link" %>
+          <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "#{current_user.email}", "#", class: "nav-link" %>
