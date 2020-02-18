@@ -1,11 +1,9 @@
-<h3><%= @user.first_name %>  <%= @user.last_name %></h3>
+<div>
+  <h2><%= @user.first_name %>  <%= @user.last_name %></h2>
+  <p><%= @user.email%></p>
+  <p><%= @user.description %> </p>
+</div>
 
-<p>description: </p>
-<p> <%= @user.description %> </p>
-
-<p> email: <%= @user.email %> </p>
-
-<h3> All the animal: </h3>
 
 <% @user.animals.each do |animal| %>
   <h4><%= animal.name %></h4>
