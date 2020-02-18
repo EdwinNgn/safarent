@@ -1,0 +1,8 @@
+<h3><%= @user.first_name %>  <%= @user.last_name %></h3>
+
+<p>description: </p>
+<p> <%= @user.description %> </p>
+
+<p> email: <%= @user.email %> </p>
+
+<%= link_to "edit your profil", edit_user_registration_path(@user) %>
