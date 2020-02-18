@@ -7,15 +7,45 @@
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
+.logo-navbar {
   width: 40px;
 }
 
-.fas {
-  font-size: 20px;
-  padding: 5px;
-  border: solid 1px;
-  border-radius: 50%;
-  margin-top: 5px;
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+.fa-user-tie {
+  font-size:       20px;
+  padding:         5px;
+  border: solid    1px;
+  border-radius:   50%;
+  margin-top:      5px;
+  color: black;
   text-decoration: none;
+}
+
+.fa-user-ninja {
+  font-size:       20px;
+  padding:         5px;
+  border: solid    1px;
+  border-radius:   50%;
+  margin-top:      5px;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-transparent {
+  position:         fixed;
+  background-color: transparent;
+  width:            100vw;
+}
+
+.avatar-navbar:hover {
+  color:   rgb(250,250,250);
+  opacity: 0.8;
+}
+
+.white-item-navbar {
+  color: white !important;
 }
