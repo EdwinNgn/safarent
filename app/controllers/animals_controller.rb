@@ -3,15 +3,13 @@ class AnimalsController < ApplicationController
 
   def index
     @location = params[:location].blank? ?  "Lille" : params[:location]
-    start_date = params[:start_date].to_date
-    end_date = params[:end_date].to_date
-    if start_date.blank? || end_date.blank?
+    if params[:start_date].blank? || params[:end_date].blank?
       @animals = Animal.where(location: @location)
     else
       animals_in_location = Animal.where(location: @location)
       @animals = []
       animals_in_location.each do |animal|
-        @animals << animal if animal.bookable?(start_date,end_date)
+        @animals << animal if animal.bookable?(params[:start_date],params[:end_date])
       end
     end
   end
