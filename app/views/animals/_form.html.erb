@@ -1,10 +1,10 @@
 <%= simple_form_for @animal do |f| %>
-  <%= f.input :name %>
-  <%= f.input :animal_type %>
-  <%= f.input :species %>
-  <%= f.input :description %>
-  <%= f.input :price_per_day %>
-  <%= f.input :location %>
+  <%= f.input :name, placeholder: "Tigrou", label: "Your animal's name" %>
+  <%= f.input :animal_type, placeholder: "Felin" %>
+  <%= f.input :species, placeholder: "Tiger" %>
+  <%= f.input :description, placeholder: "Tigrou is Winnie the Poo's bestfriend!" %>
+  <%= f.input :price_per_day, placeholder: "50€" %>
+  <%= f.input :location, placeholder: "Paris" %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-  <%= f.submit "create an animal"%>
+  <%= f.submit "Add a new animal", class:"btn btn-primary mb-3"%>
 <% end %>
