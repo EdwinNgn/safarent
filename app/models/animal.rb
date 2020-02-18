@@ -9,4 +9,11 @@ class Animal < ApplicationRecord
   has_many :reviews, through: :bookings
   belongs_to :user
   has_many_attached :photos
+
+  def bookable?(start_date,end_date)
+    bookings.each do |booking|
+      return false if booking.overlaps?(start_date,end_date)
+    end
+    return true
+  end
 end

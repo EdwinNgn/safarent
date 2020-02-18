@@ -6,21 +6,21 @@
   <div class="container">
     <h1>Safarent bring <strong>exotic animals</strong> to <strong>wonderfull people</strong>!</h1>
     <p>You can book whenever you want a beautiful exotic animal from nice owners.</p>
-    <form id="search" class="form-inline form">
+    <form id="search" class="form-inline form" action = "/animals" method="get">
       <div>
         <p><label for="location">Location</label></p>
-        <input id="location" type="text" class="form-control ml-auto mr-2" placeholder="Lille">
+        <input name="location" id="location" type="text" class="form-control ml-auto mr-2" placeholder="Lille">
       </div>
       <div>
         <p><label for="start-date">Start Date</label></p>
-        <input id="start-date" type="date" class="form-control ml-auto mr-2" placeholder="start date">
+        <input name="start_date" id="start-date" type="date" class="form-control ml-auto mr-2" placeholder="start date">
       </div>
       <div>
         <p><label for="end-date">End Date</label></p>
-        <input id="end-date" type="date" class="form-control ml-auto mr-2">
+        <input name="end_date" id="end-date" type="date" class="form-control ml-auto mr-2" >
       </div>
       <div>
-        <p><label for="Submit">Click</label></p>
+        <p><label for="Submit"> Find your animal</label></p>
         <input type="submit" class="btn btn-primary mr-auto ml-2" value="Search">
       </div>
     </form>
