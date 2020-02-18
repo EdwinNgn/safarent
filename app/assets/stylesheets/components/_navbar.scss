@@ -52,11 +52,15 @@
 
 .logo-naming{
   font-family: 'Sriracha', cursive;
-  margin-left: 5px;
-  color: #D4A729;
-  font-size: 25px;
+  margin-left:  5px;
+  color:        #D4A729;
+  font-size:    30px;
   text-decoration: none;
-  // border: solid 1px #6D322E;
+  text-shadow:
+                -1px -1px 0 #6D322E,
+                1px -1px 0 #6D322E,
+                -1px 1px 0 #6D322E,
+                1px 1px 0 #6D322E;
   &:hover {
     text-decoration: none;
     color: #D4A729;
