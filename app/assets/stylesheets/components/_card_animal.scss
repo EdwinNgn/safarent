@@ -1,0 +1,99 @@
+.card-animal {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.card-animal > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.animal-img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.card-animal h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-animal p {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+}
+
+
+.card-animal .card-animal-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+.card-animal-infos .card-animal-user {
+  position: absolute;
+  right: 16px;
+  top: -20px;
+  width: 40px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.background {
+  background-image: linear-gradient(rgba(245,255,250,0.3), rgba(0,0,0,0.3)), url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/5b8c23cfb4d4773db6bdd8f7a9f444bc/photo-1581838158684-b0cb031d5d8c');
+  background-position: 50%;
+  background-size: cover;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+
+}

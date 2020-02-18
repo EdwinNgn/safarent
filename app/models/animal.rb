@@ -8,5 +8,5 @@ class Animal < ApplicationRecord
   has_many :bookings
   has_many :reviews, through: :bookings
   belongs_to :user
-
+  has_many_attached :photos
 end
