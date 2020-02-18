@@ -5,3 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'faker'
+
+Animal.destroy_all
+User.destroy_all
+Booking.destroy_all
+Review.destroy_all
+
+
+user = User.create(email: "test@gmail.com", password: "azertyuiop")
+#je ne crée que des chiens pour l'instant plus simple :)
+5.times do
+  user = User.create(email: Faker::Internet.email, password: Faker::Alphanumeric.alpha(number: 8))
+  p user
+  name = Faker::Creature::Dog.name
+  animal_type = "dog"
+  species = Faker::Creature::Dog.breed
+  price= rand(30..50)
+  description = Faker::Creature::Dog.meme_phrase
+  animal = Animal.create(user: user, name: name, animal_type: animal_type, species: species, price_per_day: price, location: "Lille", description: description)
+  p animal
+end
