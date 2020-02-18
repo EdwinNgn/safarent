@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
       reviews.each { |review| review.save}
       redirect_to animal_path(@booking.animal)
     else
-      render :new
+      render :action => 'new'
     end
   end
 
