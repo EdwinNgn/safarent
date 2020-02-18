@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon d-flex justify-content-between <%= 'navbar-transparent' if params[:action] == "home" %>">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon d-flex justify-content-between <%= 'navbar-transparent' if params[:action] == "home" || params[:action] == "index" %>">
   <%= link_to root_path do %>
     <%= image_tag "logo-safarent", alt: "alttext", class: "logo-navbar" %>
   <% end %>
@@ -7,13 +7,13 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item active">
-          <%= link_to "Home", root_path, class: "nav-link #{'white-item-navbar' if params[:action] == "home"}" %>
+          <%= link_to "Home", root_path, class: "nav-link #{'white-item-navbar' if params[:action] == "home" || params[:action] == "index"}" %>
         </li>
         <li class="nav-item">
-          <%= link_to "#{current_user.email}", "#", class: "nav-link #{'white-item-navbar' if params[:action] == "home"}" %>
+          <%= link_to "#{current_user.email}", "#", class: "nav-link #{'white-item-navbar' if params[:action] == "home" || params[:action] == "index"}" %>
         </li>
         <li class="nav-item dropdown">
-          <%= image_tag "", class:"fas fa-user-tie #{'white-item-navbar' if params[:action] == "home"}", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <%= image_tag "", class:"fas fa-user-tie #{'white-item-navbar' if params[:action] == "home" || params[:action] == "index"}", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "View my profile", "#", class: "dropdown-item" %>
             <%= link_to "Edit My profile", edit_user_registration_path , class: "dropdown-item" %>
@@ -23,13 +23,13 @@
         </li>
       <% else %>
         <li class="nav-item active">
-          <%= link_to "Home", root_path, class:"nav-link #{'white-item-navbar' if params[:action] == "home"}" %>
+          <%= link_to "Home", root_path, class:"nav-link #{'white-item-navbar' if params[:action] == "home" || params[:action] == "index"}" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Sign in", new_user_session_path, class:"nav-link #{'white-item-navbar' if params[:action] == "home"}" %>
+          <%= link_to "Sign in", new_user_session_path, class:"nav-link #{'white-item-navbar' if params[:action] == "home" || params[:action] == "index"}" %>
         </li>
         <li class="nav-item ninja">
-          <%= link_to "", new_user_session_path, class:"fas fa-user-ninja avatar-navbar #{'white-item-navbar' if params[:action] == "home"}" %>
+          <%= link_to "", new_user_session_path, class:"fas fa-user-ninja avatar-navbar #{'white-item-navbar' if params[:action] == "home" || params[:action] == "index"}" %>
         </li>
       <% end %>
     </ul>
