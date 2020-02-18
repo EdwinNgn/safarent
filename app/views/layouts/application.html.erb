@@ -33,7 +33,9 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <%= link_to "View my profile", "#", class: "dropdown-item" %>
                 <%= link_to "Edit My profile", edit_user_registration_path , class: "dropdown-item" %>
-                <%= link_to "Add an animal", new_animal_path, class: "dropdown-item" %>
+                <% if policy(Animal).create? %>
+                  <%= link_to "Add an animal", new_animal_path, class: "dropdown-item" %>
+                <% end %>
                 <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
               </div>
             </li>

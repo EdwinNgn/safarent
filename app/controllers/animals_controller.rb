@@ -6,6 +6,7 @@ class AnimalsController < ApplicationController
   end
 
   def show
+    authorize @animal
   end
 
   def new
@@ -26,6 +27,7 @@ class AnimalsController < ApplicationController
   end
 
   def update
+    authorize @animal
     @animal.update(animal_params)
     redirect_to animal_path(@animal)
   end

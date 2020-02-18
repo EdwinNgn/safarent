@@ -9,4 +9,6 @@
 <% end %>
 
 
-<p> <%= link_to("edit", edit_animal_path(@animal)) %></p>
+<% if policy(@animal).edit? %>
+  <p> <%= link_to "Update", edit_animal_path(@animal) %></p>
+<% end %>
