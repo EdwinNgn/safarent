@@ -5,4 +5,8 @@ class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :animal
   has_many :reviews
+
+  def overlaps?(other_start, other_end)
+    start_date <= other_end && other_start <= end_date
+  end
 end
