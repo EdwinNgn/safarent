@@ -4,23 +4,17 @@ class ReviewsController < ApplicationController
   end
 
   def new
-    @review = Review.new
-    @booking = Booking.find(params[:booking_id])
-    @reviews_types = current_user == @booking.user ? ["owner", "animal"] : ["renter"]
+    @booking  = Booking.find(params[:booking_id])
+    @review   = Review.new
+    @reviewer = (current_user == @booking.user ? "renter" : "owner")
   end
 
   def create
-    @review = Review.new
-    @booking = Booking.find(params[:booking_id])
-    @reviews_types = current_user == @booking.user ? ["owner", "animal"] : ["renter"]
-    reviews = []
-    @reviews_types.each do |review_type|
-      review = Review.new(review_params(params[:review][review_type]))
-      review.booking = @booking
-      reviews << review
-    end
-    if reviews.all? { |review| review.valid?}
-      reviews.each { |review| review.save}
+    @review   = Review.new(review_params)
+    @booking  = Booking.find(params[:booking_id])
+    @reviewer = (current_user == @booking.user ? "renter" : "owner")
+
+    if @review.save_all(@reviewer, @booking)
       redirect_to animal_path(@booking.animal)
     else
       render :new
@@ -29,8 +23,13 @@ class ReviewsController < ApplicationController
 
 private
 
-  def review_params(my_params)
-   my_params.permit(:description, :rating, :review_type)
+  def review_params
+    params.require(:review).permit(:description_animal,
+                                   :description_owner,
+                                   :description_renter,
+                                   :rating_animal,
+                                   :rating_owner,
+                                   :rating_renter)
   end
 
   def set_up_review(user)

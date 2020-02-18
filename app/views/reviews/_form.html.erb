@@ -1,17 +1,12 @@
 <%= simple_form_for [@booking, @review] do |f| %>
-  <% @reviews_types.each do |type| %>
-    <%= f.simple_fields_for type do |p| %>
-       <%= p.input :review_type, :as => :hidden, :input_html => { :value => type } %>
-       <%= p.input :description %>
-       <%= p.input :rating %>
-    <% end %>
+  <% if @reviewer == "renter" %>
+    <%= f.input :description_animal %>
+    <%= f.input :rating_animal, collection: 1..5 %>
+    <%= f.input :description_owner %>
+    <%= f.input :rating_owner, collection: 1..5 %>
+  <% else %>
+    <%= f.input :description_renter %>
+    <%= f.input :rating_renter, collection: 1..5 %>
   <% end %>
-
-
-  <%#= f.input :review_type, collection: ["renter", "owner", "animal"] %>
-  <%#= f.input :rating, collection: [1, 2 ,3 , 4, 5] %>
-  <%#= f.input :rating, collection: [1, 2 ,3 , 4, 5] %>
-  <%#= f.input :description, as: :text %>
-  <%#= f.input :description, as: :text %>
   <%= f.submit "Add a rating!"%>
 <% end %>
