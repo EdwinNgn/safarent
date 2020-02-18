@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="root_path">
         <%= image_tag "logo-safarent", alt: "alttext" %>
     </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
         </ul>
       </div>
     </div>
-    <%= yield %>
+      <%= yield %>
      <p class="notice"><%= notice %></p>
      <p class="alert"><%= alert %></p>
     <%= javascript_include_tag 'application' %>
