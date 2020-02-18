@@ -9,7 +9,7 @@ class AnimalsController < ApplicationController
       animals_in_location = Animal.where(location: @location)
       @animals = []
       animals_in_location.each do |animal|
-        @animals << animal if animal.bookable?(params[:start_date],params[:end_date])
+        @animals << animal if animal.bookable?(params[:start_date].to_date,params[:end_date].to_date)
       end
     end
   end
