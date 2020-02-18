@@ -1,0 +1,15 @@
+<div>
+  <h2><%= @user.first_name %>  <%= @user.last_name %></h2>
+  <p><%= @user.email%></p>
+  <p><%= @user.description %> </p>
+</div>
+
+
+<% @user.animals.each do |animal| %>
+  <h4><%= animal.name %></h4>
+  <p><%= animal.description %></p>
+  <p><%= animal.price_per_day.to_s + "$" %></p>
+<% end %>
+
+
+<%= link_to "edit your profil", edit_user_registration_path(@user) %>

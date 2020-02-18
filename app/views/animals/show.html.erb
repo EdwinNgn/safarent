@@ -2,6 +2,10 @@
 <p><%= @animal.description %></p>
 <p><%= @animal.location %></p>
 
+
+<p> Owner:  <%= @animal.user.email %></p>
+<p> <%= link_to "see the owner", profil_path(@animal.user) %> </p>
+
 <%= @animal.photos %>
 <% @animal.photos.each do |photo| %>
 <%= photo.key %>
@@ -12,3 +16,4 @@
 <% if policy(@animal).edit? %>
   <p> <%= link_to "Update", edit_animal_path(@animal) %></p>
 <% end %>
+
