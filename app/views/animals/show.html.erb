@@ -2,5 +2,6 @@
 <p><%= @animal.description %></p>
 <p><%= @animal.location %></p>
 
-
+<p> Owner:  <%= @animal.user.email %></p>
+<p> <%= link_to "see the owner", profil_path(@animal.user) %> </p>
 <p> <%= link_to("edit", edit_animal_path(@animal)) %></p>

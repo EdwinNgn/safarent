@@ -5,4 +5,13 @@
 
 <p> email: <%= @user.email %> </p>
 
+<h3> All the animal: </h3>
+
+<% @user.animals.each do |animal| %>
+  <h4><%= animal.name %></h4>
+  <p><%= animal.description %></p>
+  <p><%= animal.price_per_day.to_s + "$" %></p>
+<% end %>
+
+
 <%= link_to "edit your profil", edit_user_registration_path(@user) %>
