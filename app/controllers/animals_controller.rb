@@ -1,11 +1,11 @@
 class AnimalsController < ApplicationController
+  before_action :set_animal, only: [:show, :destroy, :edit, :update]
+
   def index
     @animals = Animal.all
   end
 
   def show
-    id = params[:id]
-    @animal = Animal.find(id)
   end
 
   def new
@@ -25,21 +25,24 @@ class AnimalsController < ApplicationController
 
 
   def edit
-    id = params[:id]
-    @animal = Animal.find(id)
   end
 
   def update
-    id = params[:id]
-    @animal = Animal.find(id)
     @animal.update(animal_params)
     redirect_to animal_path(@animal)
   end
 
   def destroy
+    @animal.destroy
+    redirect_to animals_path
   end
 
   private
+
+  def set_animal
+    @animal = Animal.find(params[:id])
+  end
+
   def animal_params
     params.require(:animal).permit(:name, :animal_type, :species, :price_per_day, :location, :description)
   end
