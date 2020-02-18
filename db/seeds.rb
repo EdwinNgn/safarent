@@ -13,6 +13,8 @@ User.destroy_all
 Booking.destroy_all
 Review.destroy_all
 
+
+user = User.create(email: "test@gmail.com", password: "azertyuiop")
 #je ne crée que des chiens pour l'instant plus simple :)
 5.times do
   user = User.create(email: Faker::Internet.email, password: Faker::Alphanumeric.alpha(number: 8))
