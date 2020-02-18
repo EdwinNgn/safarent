@@ -1,5 +1,22 @@
-<h1>Animals</h1>
-<% @animals.each do |animal| %>
-  <p><%= animal.name %></p>
-  <%= link_to("get more infor", animal_path(animal)) %>
-<% end %>
+<div class="background mb-0">
+<div class="container" >
+  <h1 style ="color: white; text-align: center; margin-bottom: 20px"> All animals available </h1>
+
+  <div class="cards">
+    <% @animals.each do |animal| %>
+      <div class="card-animal">
+        <img src="https://images.unsplash.com/photo-1551972251-12070d63502a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" />
+        <div class="card-animal-infos">
+          <div>
+            <h2><%= animal.name %></h2>
+            <p><%= animal.animal_type %></p>
+            <%= link_to("details", animal_path(animal)) %>
+          </div>
+          <h2 class="card-animal-pricing"><%= animal.price_per_day %>€</h2>
+          <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-animal-user avatar-bordered" />
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+</div>
