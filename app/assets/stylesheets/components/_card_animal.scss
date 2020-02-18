@@ -1,3 +1,10 @@
+.header {
+  color: white;
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 50px;
+}
+
 .card-animal {
   overflow: hidden;
   background: white;
@@ -13,9 +20,10 @@
 .animal-img {
   height: 200px;
   width: 100%;
-  object-fit: cover;
   vertical-align: middle;
   border-style: none;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .card-animal h2 {
@@ -89,10 +97,10 @@
 
 .background {
   background-image: linear-gradient(rgba(245,255,250,0.3), rgba(0,0,0,0.3)), url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/5b8c23cfb4d4773db6bdd8f7a9f444bc/photo-1581838158684-b0cb031d5d8c');
-  background-position: 50%;
+  background-position: 100%;
   background-size: cover;
-  height: 100vh;
-  background-repeat: no-repeat;
+  height: 200vh;
+  // background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
 
