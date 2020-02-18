@@ -12,7 +12,7 @@ class AnimalsController < ApplicationController
     @animal = Animal.new
   end
 
-   def create
+  def create
     @animal = Animal.new(animal_params)
     @animal.user = current_user
     if @animal.save
