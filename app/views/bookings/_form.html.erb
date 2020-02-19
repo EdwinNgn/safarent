@@ -1,4 +1,4 @@
-<%= simple_form_for [@animal, @booking] do |f| %>
+<%= simple_form_for ([@animal, @booking])do |f| %>
   <%= f.input :start_date, as: :date %>
   <%= f.input :end_date %>
   <%= f.submit "Book!"%>
