@@ -2,14 +2,14 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :destroy, :edit, :update]
 
   def index
-    @location = params[:location].blank? ?  "Lille" : params[:location]
-    if params[:start_date].blank? || params[:end_date].blank?
+    @location = params[:search][:location].blank? ?  "Lille" : params[:search][:location]
+    if params[:search][:start_date].blank? || params[:search][:end_date].blank?
       @animals = Animal.where(location: @location)
     else
       animals_in_location = Animal.where(location: @location)
       @animals = []
       animals_in_location.each do |animal|
-        @animals << animal if animal.bookable?(params[:start_date].to_date,params[:end_date].to_date)
+        @animals << animal if animal.bookable?(params[:search][:start_date].to_date,params[:search][:end_date].to_date)
       end
     end
   end
