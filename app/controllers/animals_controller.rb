@@ -12,6 +12,16 @@ class AnimalsController < ApplicationController
         @animals << animal if animal.bookable?(params[:start_date].to_date,params[:end_date].to_date)
       end
     end
+
+    @animals_geolocations = Animal.geocoded
+    @markers = @animals_geolocations.map do |animal|
+      {
+        lat: animal.latitude,
+        lng: animal.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { animal: animal })
+      }
+    end
+
   end
 
   def show
@@ -25,8 +35,10 @@ class AnimalsController < ApplicationController
 
   def create
     @animal = Animal.new(animal_params)
+    @animal.address = "#{params[:animal][:street]}, #{params[:animal][:zipcode]} #{params[:animal][:location]}"
     @animal.user = current_user
     if @animal.save
+      raise
       redirect_to animal_path(@animal)
     else
       render :new
@@ -53,6 +65,6 @@ class AnimalsController < ApplicationController
   end
 
   def animal_params
-    params.require(:animal).permit(:name, :animal_type, :species, :price_per_day, :location, :description, photos: [])
+    params.require(:animal).permit(:name, :animal_type, :species, :price_per_day,:street, :zipcode, :location, :description, photos: [])
   end
 end

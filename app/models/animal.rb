@@ -9,6 +9,8 @@ class Animal < ApplicationRecord
   has_many :reviews, through: :bookings
   belongs_to :user
   has_many_attached :photos
+  geocoded_by :address, length: { minimum: 0, allow_nil: true}
+  after_validation :geocode, if: :will_save_change_to_address?
 
   def bookable?(start_date,end_date)
     bookings.each do |booking|
