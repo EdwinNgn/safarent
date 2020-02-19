@@ -1,15 +1,78 @@
-<div>
-  <h2><%= @user.first_name %>  <%= @user.last_name %></h2>
-  <p><%= @user.email%></p>
-  <p><%= @user.description %> </p>
+<div class="container">
+  <div class="profile-card">
+    <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFZ7Zq70rdi_Q/profile-displayphoto-shrink_200_200/0?e=1585785600&v=beta&t=CtCmGgbjDzvC6xw6StxBbwMrBde2KCRPwnuUZX2Beb4" />
+    <div class="profile-card-infos">
+      <h2><%= @user.first_name %>  <%= @user.last_name %></h2>
+      <p><%= @user.description %></p>
+      <% if @user == current_user %>
+        <%= link_to edit_user_registration_path(@user) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <% unless @user.bookings.first.nil?  %>
+    <div class="my-booking my-3">
+      <h3>My bookings</h3>
+      <div class="profile-cards">
+      <% @user.bookings.each do |booking| %>
+        <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path booking.animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
+          <%= booking.animal.name  %>
+          <%= link_to new_booking_review_path(booking) do %>
+            Add a review
+          <% end %>
+        </div>
+      <%end %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <% unless @user.animals.first.nil?  %>
+    <div class="my-animals my-3">
+      <h3>My animals</h3>
+      <div class="profile-cards">
+      <% @user.animals.each do |animal| %>
+        <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
+          <% if @user == current_user %>
+            <%= link_to animal_bookings_path(animal) do %>
+              <%= "See bookings for #{animal.name}"  %>
+            <% end %>
+            <div class="card-footer ">
+              <%= link_to edit_animal_path(animal) do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <%= link_to animal_path(animal), method: :delete do  %>
+                <i class="far fa-trash-alt"></i>
+              <% end %>
+            </div>
+          <% else %>
+            <%= link_to animal_path(animal) do %>
+              <%= "Book #{animal.name}"  %>
+            <% end %>
+          <% end %>
+        </div>
+      <%end %>
+      </div>
+    </div>
+  <% end %>
+
+    <% unless @user.animals.first.nil? || @user.animals.first.reviews.first.nil? %>
+    <div class="my-reviews my-3">
+      <h3>My reviews</h3>
+      <div class="profile-cards">
+        <% @user.animals.each do |animal|  %>
+          <% animal.reviews.each do |review| %>
+            <% if review.review_type == "owner" %>
+              <li>
+                <%= "#{review.rating} - #{review.description}"%>
+              </li>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
 </div>
-
-
-<% @user.animals.each do |animal| %>
-  <h4><%= animal.name %></h4>
-  <p><%= animal.description %></p>
-  <p><%= animal.price_per_day.to_s + "$" %></p>
-<% end %>
-
-
-<%= link_to "edit your profil", edit_user_registration_path(@user) %>

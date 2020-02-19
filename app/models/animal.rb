@@ -5,10 +5,10 @@ class Animal < ApplicationRecord
   validates :location, presence: true
   validates :species, presence: true
   validates :description, presence: true
-  has_many :bookings
+  has_many :bookings, dependent: :destroy
   has_many :reviews, through: :bookings
   belongs_to :user
-  has_many_attached :photos
+  has_many_attached :photos, dependent: :destroy
 
   def bookable?(start_date,end_date)
     bookings.each do |booking|
