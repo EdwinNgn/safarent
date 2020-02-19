@@ -2,10 +2,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
+
 }
 
 
 .card-profile-page {
+  position: relative;
   background-size: cover;
   background-position: center;
   height: 180px;
@@ -18,6 +20,15 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-decoration: none;
+}
+
+.card-footer {
+  color: white;
+  text-decoration: none;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }
 
 // Smallest device

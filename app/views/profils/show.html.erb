@@ -19,6 +19,9 @@
       <% @user.bookings.each do |booking| %>
         <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path booking.animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
           <%= booking.animal.name  %>
+          <%= link_to new_booking_review_path(booking) do %>
+            Add a review
+          <% end %>
         </div>
       <%end %>
       </div>
@@ -36,6 +39,14 @@
             <%= link_to animal_bookings_path(animal) do %>
               <%= "See bookings for #{animal.name}"  %>
             <% end %>
+            <div class="card-footer ">
+              <%= link_to edit_animal_path(animal) do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <%= link_to animal_path(animal), method: :delete do  %>
+                <i class="far fa-trash-alt"></i>
+              <% end %>
+            </div>
           <% else %>
             <%= link_to animal_path(animal) do %>
               <%= "Book #{animal.name}"  %>
@@ -47,18 +58,21 @@
     </div>
   <% end %>
 
-  <% unless @user.reviews.nil? %>
+    <% unless @user.animals.first.nil? || @user.animals.first.reviews.first.nil? %>
     <div class="my-reviews my-3">
-      <h3>My bookings</h3>
+      <h3>My reviews</h3>
       <div class="profile-cards">
-      <% @user.reviews.each do |review| %>
-        <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path booking.animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
-          <%= booking.animal.name  %>
-        </div>
-      <%end %>
+        <% @user.animals.each do |animal|  %>
+          <% animal.reviews.each do |review| %>
+            <% if review.review_type == "owner" %>
+              <li>
+                <%= "#{review.rating} - #{review.description}"%>
+              </li>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   <% end %>
-
 
 </div>
