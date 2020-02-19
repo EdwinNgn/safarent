@@ -1,7 +1,8 @@
 class BookingsController < ApplicationController
 
   def index
-    @booking = Booking.all
+    @animal = Animal.find(params[:animal_id])
+    @bookings = Booking.where(animal:@animal).all
   end
 
   def new
