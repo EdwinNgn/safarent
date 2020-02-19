@@ -31,6 +31,14 @@
   right: 0px;
 }
 
+.no-decoration {
+  text-decoration: none;
+  color: white;
+  &:hover{
+    color: #d4a711;
+  }
+}
+
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
   .profile-cards {
