@@ -17,7 +17,7 @@ class AnimalsController < ApplicationController
       end
     end
 
-    @animals_geolocations = Animal.geocoded
+    @animals_geolocations = @animals.geocoded
     @markers = @animals_geolocations.map do |animal|
       {
         lat: animal.latitude,
