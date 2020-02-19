@@ -11,9 +11,9 @@ class BookingsController < ApplicationController
 
   def create
     @animal = Animal.find(params[:animal_id])
-    @booking = Booking.new(booking_params)
-    start_date = Date.new(booking_params["start_date(1i)"].to_i,booking_params["start_date(2i)"].to_i,booking_params["start_date(3i)"].to_i)
-    end_date = Date.new(booking_params["end_date(1i)"].to_i,booking_params["end_date(2i)"].to_i,booking_params["end_date(3i)"].to_i)
+    start_date = booking_params[:start_date].split("to")[0].to_date
+    end_date = booking_params[:end_date].to_date
+    @booking = Booking.new(start_date: start_date, end_date: end_date)
     @booking.user = current_user
     @booking.animal = @animal
     if @animal.bookable?(start_date,end_date)

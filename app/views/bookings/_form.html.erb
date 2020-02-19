@@ -1,5 +1,5 @@
-<%= simple_form_for ([@animal, @booking])do |f| %>
-  <%= f.input :start_date, as: :date %>
-  <%= f.input :end_date %>
-  <%= f.submit "Book!"%>
+<%= simple_form_for [animal, booking] do |f| %>
+  <%= f.input :start_date, placeholder: 'Start Date',as: :string, required: false, input_html: { class: "mb-2 mr-sm-2", id: "range_start" } %>
+  <%= f.input :end_date, placeholder: 'End Date', as: :string, required: false, input_html: { class: "mb-2 mr-sm-2",id: "range_end" } %>
+  <%= f.button :submit, "Go", class: "btn btn-primary" %>
 <% end %>
