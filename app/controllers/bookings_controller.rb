@@ -20,7 +20,8 @@ class BookingsController < ApplicationController
       @booking.save
       redirect_to(booking_path(@booking))
     else
-      render 'animals/show'
+      redirect_to animal_path(@animal), alert: "Already Booked at this period :'("
+      #render 'animals/show'
     end
   end
 
