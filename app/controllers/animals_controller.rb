@@ -42,7 +42,6 @@ class AnimalsController < ApplicationController
     @animal.address = "#{params[:animal][:street]}, #{params[:animal][:zipcode]} #{params[:animal][:location]}"
     @animal.user = current_user
     if @animal.save
-      raise
       redirect_to animal_path(@animal)
     else
       render :new
