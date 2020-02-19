@@ -5,10 +5,10 @@ class Animal < ApplicationRecord
   validates :location, presence: true
   validates :species, presence: true
   validates :description, presence: true
-  has_many :bookings
+  has_many :bookings, dependent: :destroy
   has_many :reviews, through: :bookings
   belongs_to :user
-  has_many_attached :photos
+  has_many_attached :photos, dependent: :destroy
   geocoded_by :address, length: { minimum: 0, allow_nil: true}
   after_validation :geocode, if: :will_save_change_to_address?
 
