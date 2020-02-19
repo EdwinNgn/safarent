@@ -1,4 +1,7 @@
-<h3>Congratulation</h3>
-<h4> you booked <%= @booking.animal.name %> from <%= @booking.start_date %> to <%= @booking.end_date%></h4>
-<h3> the total price is <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %> $</h3>
-<h3> <%= link_to "more info about the owner",  profil_path(@booking.animal.user) %></h3>
+<div class="container">
+  <h2>Congratulation</h2>
+  <img class="d-block w-50" src="<%= cl_image_path @booking.animal.photos[0].key %>" alt="First slide">
+  <h6> You booked <%= @booking.animal.name %> from <%= @booking.start_date %> to <%= @booking.end_date%></h6>
+  <h6> The total price is <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %> $</h6>
+  <%= link_to "More info about the owner",  profil_path(@booking.animal.user), class: "btn btn-primary" %>
+</div>
