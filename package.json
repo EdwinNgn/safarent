@@ -7,7 +7,8 @@
     "flatpickr": "^4.6.3",
     "flicker": "^1.1.5",
     "jquery": "^3.4.1",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "typed.js": "^2.0.11"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"
