@@ -46,6 +46,14 @@ class AnimalsController < ApplicationController
     redirect_to animals_path
   end
 
+  def locations
+    animals = Animal.all
+    locations = []
+    animals.each do |animal|
+      p animal.location
+    end
+  end
+
   private
 
   def set_animal
