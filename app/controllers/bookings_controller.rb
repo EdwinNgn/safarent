@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
     @booking.animal = @animal
     if @animal.bookable?(start_date,end_date)
       @booking.save
-      redirect_to(booking_path(@booking))
+      redirect_to booking_path(@booking), alert: "Congrats"
     else
       redirect_to animal_path(@animal), alert: "Already Booked at this period :'("
       #render 'animals/show'
@@ -35,8 +35,27 @@ class BookingsController < ApplicationController
     @booking.destroy
   end
 
+  def edit
+    # @booking = Booking.find(params[:id])
+    # @booking[:status] = "accept"
+  end
+
+  def accept
+    @booking = Booking.find(params[:id])
+    @booking[:status] = "accept"
+    @booking.save
+    redirect_to animal_bookings_path(@booking.animal)
+  end
+
+  def refuse
+    @booking = Booking.find(params[:id])
+    @booking[:status] = "refuse"
+    @booking.save
+    redirect_to animal_bookings_path(@booking.animal)
+  end
+
 private
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :status, :read)
   end
 end
