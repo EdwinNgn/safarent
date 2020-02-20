@@ -2,7 +2,11 @@
 
   <!-- Animals cards -->
   <div class="container" >
-    <h1 class ="header"> All animals available in <%= @location.capitalize %> </h1>
+    <h1 class ="header"> All animals available
+      <% unless @location.blank? %>
+        in <%= @location.capitalize %>
+      <% end %>
+    </h1>
     <div class="cards">
       <% @animals.each do |animal| %>
 

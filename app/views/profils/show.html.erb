@@ -6,7 +6,7 @@
   <div class="profile-card">
     <img src="<%= cl_image_path @user.photo.key %>" />
     <div class="profile-card-infos">
-      <h2><%= @user.first_name %>  <%= @user.last_name %></h2>
+      <h2><%= @user.first_name %>  <%= @user.last_name %> <%=  %></h2>
       <p><%= @user.description %></p>
       <% if @user == current_user %>
         <%= link_to edit_user_registration_path(@user), class:"no-decoration" do %>
@@ -19,30 +19,9 @@
 
 
 
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item">
-      <a class="nav-link active" href="#profile-booking">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Much longer nav link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
-  </ul>
-
-
-
-
-
-
-
   <% unless @user.bookings.first.nil?  %>
-    <div class="my-booking my-3" id="profile-booking">
-      <h3>My bookings</h3>
+    <div class="profile-category my-booking my-3" id="profile-booking">
+      <h3 class="border-bottom">My bookings</h3>
       <div class="profile-cards">
       <% @user.bookings.each do |booking| %>
         <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path booking.animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
@@ -75,8 +54,8 @@
 
 
   <% unless @user.animals.first.nil?  %>
-    <div class="my-animals my-3">
-      <h3>My animals</h3>
+    <div class="profile-category my-animals my-3" id="profile-animal">
+      <h3 class="border-bottom">My animals</h3>
       <div class="profile-cards">
       <% @user.animals.each do |animal| %>
         <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
@@ -86,7 +65,15 @@
             <% end %>
 
 
-
+            <div class="card-top">
+              <% last_booking = animal.bookings.map{|booking| booking.start_date}.max %>
+              <% unless last_booking.nil? %>
+                <% diff_day = (last_booking - Date.today).to_i %>
+                <% if diff_day > 0  %>
+                  <%= "Next booking in #{diff_day} days" %>
+                <% end %>
+              <% end %>
+            </div>
 
             <div class="card-footer ">
               <%= link_to edit_animal_path(animal), class:"no-decoration" do %>
@@ -107,21 +94,49 @@
     </div>
   <% end %>
 
-    <% unless @user.animals.first.nil? || @user.animals.first.reviews.first.nil? %>
-    <div class="my-reviews my-3">
-      <h3>My reviews</h3>
-      <div class="profile-cards">
-        <% @user.animals.each do |animal|  %>
-          <% animal.reviews.each do |review| %>
-            <% if review.review_type == "owner" %>
-              <li>
-                <%= "#{review.rating} - #{review.description}"%>
-              </li>
+  <% unless @user.animals.first.nil? || @user.animals.all?{|animal| animal.reviews.first.nil?} %>
+    <div class="p-3 mb-5 rounded">
+      <div class="profile-category my-review  d-flex flex-column justify-content-between p-3">
+          <h3 class="border-bottom"> My reviews </h3>
+          <div class="reviews">
+            <% @user.animals.each do |animal|  %>
+              <% animal.reviews.each do |review| %>
+                <% if review.review_type == "owner" %>
+                  <div class="profile-review">
+                    <!-- Code one review here -->
+                    <img src="<%= cl_image_path review.booking.user.photo.key %>" alt="review.booking.user.first_name" class="profil-pic">
+                    <div class="review-info">
+                      <h4 class ="user-name"> <%= "#{review.booking.user.first_name} books to #{@user.first_name}"  %></h4>
+                      <p class = "review-description"><%= "#{review.rating}/5 " %><i class="fas fa-star"></i></p>
+                      <p class = "review-description"> <%= "#{review.description}" %></p>
+                    </div>
+                  </div>
+                <% elsif review.review_type == "renter" %>
+                  <div class="profile-review">
+                    <!-- Code one review here -->
+                    <img src="<%= cl_image_path review.booking.user.photo.key %>" alt="review.booking.user.first_name" class="profil-pic">
+                    <div class="review-info">
+                      <h4 class ="user-name"> <%= "#{review.booking.user.first_name} rents to #{@user.first_name}"  %></h4>
+                      <p class = "review-description"><%= "#{review.rating}/5 " %><i class="fas fa-star"></i></p>
+                      <p class = "review-description"> <%= "#{review.description}" %></p>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
+          </div>
+        </div>
       </div>
     </div>
-  <% end %>
+  <%end %>
+
+
+
+
+
+
+
+
+
 
 </div>
