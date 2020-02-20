@@ -11,8 +11,8 @@
     <p>You can book whenever you want a beautiful exotic animal from nice owners.</p>
     <%= simple_form_for :search, wrapper: :inline_form, url: "/animals",html: { class: "form-inline" }, method: "get" do |f| %>
       <%= f.input :location, placeholder: 'Enter a city', as: :string, required: false, input_html: { class: "mb-2 mr-sm-2"} %>
-      <%= f.input :start_date, placeholder: 'Start Date',as: :string, required: false, input_html: { class: "mb-2 mr-sm-2", id: "range_start" } %>
-      <%= f.input :end_date, placeholder: 'End Date', as: :string, required: false, input_html: { class: "mb-2 mr-sm-2",id: "range_end" } %>
+      <%= f.input :start_date, placeholder: 'Start Date',as: :string, required: false, input_html: { class: "mb-2 mr-sm-2", id: "flatpickr" } %>
+      <%= f.input :end_date, placeholder: 'End Date', as: :string, required: false, input_html: { class: "mb-2 mr-sm-2",id: "flatpickr_end" } %>
       <%= f.button :submit, "Let's find your animal", class: "btn btn-warning mb-2" %>
     <% end %>
   </div>
