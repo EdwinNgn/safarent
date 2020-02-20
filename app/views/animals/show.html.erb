@@ -80,27 +80,31 @@
         <div class="all-reviews d-flex flex-column justify-content-between p-3">
           <div class="reviews-title">
             <div class="border-bottom">
-              <h2>Reviews for <%= @animal.name.capitalize %></h2>
+              <div class="d-flex justify-content-between">
+                <h2>Reviews for <%= @animal.name.capitalize %></h2>
+                <p><%= @average_rate %>/5 <i class="fas fa-star"></i></p>
+              </div>
+              <h6><%= @number_of_comments %> reviews</h6>
             </div>
             <div class="reviews">
 
-              <div class="review">
-                <!-- Code one review here -->
-                <img src="https://avatars0.githubusercontent.com/u/57433401?v=4" alt="Paul" class="profil-pic">
-                <div class="review-info">
-                  <h2 class ="user-name"> Paul Chapeau </h2>
-                  <p class = "review-description">This little guy is so cute</p>
-                </div>
-              </div>
+              <% @animal.reviews.each_with_index do |review, index| %>
+                <% if review[:review_type] == "animal" %>
+                  <div class="review">
+                    <!-- Code one review here -->
+                    <%= cl_image_tag(User.find(Booking.find(@animal.reviews[index][:booking_id])[:user_id]).photo.key, crop: :thumb, gravity: :face, class: "profil-pic" ) %>
+                    <!-- <img src="https://avatars0.githubusercontent.com/u/57433401?v=4" alt="Paul" class="profil-pic"> -->
+                    <div class="review-info">
+                      <div class="d-flex justify-content-between">
+                        <h2 class ="user-name"> <%= "#{User.find( Booking.find(@animal.reviews.last[:booking_id])[:user_id])[:first_name]} #{User.find( Booking.find(@animal.reviews.last[:booking_id])[:user_id])[:last_name]}" %> </h2>
+                        <h6><%= review[:rating] %>/5 <i class="far fa-star"></i></h6>
+                      </div>
+                      <p class = "review-description"><%= @animal.reviews[index][:description] %></p>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
 
-              <div class="review">
-                <!-- Code one review here -->
-                 <img src="https://avatars2.githubusercontent.com/u/59232862?v=4https://avatars2.githubusercontent.com/u/59232862?v=4" alt="Ed" class="profil-pic">
-                <div class="review-info">
-                  <h2 class ="user-name"> Edwin Nguyen </h2>
-                  <p class = "review-description"> Adorable</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
