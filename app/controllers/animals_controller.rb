@@ -3,13 +3,25 @@ class AnimalsController < ApplicationController
 
   def index
     if params[:search].blank?
-      if params[:preferences].nil?
+      if params[:preferences][:category].blank? && params[:preferences][:price].blank?
         @animals = Animal.geocoded
-      else
+      elsif !params[:preferences][:category].blank? && params[:preferences][:price].blank?
         animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%").geocoded
         @animals = []
         animals_in_location.each do |animal|
           @animals << animal if animal.animal_type == params[:preferences][:category]
+        end
+      elsif params[:preferences][:category].blank? && !params[:preferences][:price].blank?
+        animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%").geocoded
+        @animals = []
+        animals_in_location.each do |animal|
+          @animals << animal if animal.price_per_day < params[:preferences][:price].to_i
+        end
+      else
+        animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%").geocoded
+        @animals = []
+        animals_in_location.each do |animal|
+          @animals << animal if animal.animal_type == params[:preferences][:category] && animal.price_per_day < params[:preferences][:price].to_i
         end
       end
     elsif params[:search][:location].blank?
@@ -23,7 +35,6 @@ class AnimalsController < ApplicationController
         end
       end
     end
-
     # @animals_geolocations = @animals.geocoded
     @markers = @animals.map do |animal|
       {
@@ -32,6 +43,7 @@ class AnimalsController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { animal: animal })
       }
     end
+    console
 
   end
 
