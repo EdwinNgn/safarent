@@ -1,8 +1,46 @@
 <div class="background mb-0">
-
+<% category = ["mammal", "fish", "bird"] %>
+<% price = ["Less than 50$", "Between 50$ and 200$", "Between 200$ and 500$", "More than 500$"] %>
   <!-- Animals cards -->
   <div class="container" >
     <h1 class ="header"> All animals available in <%= @location.capitalize %> </h1>
+    <%= simple_form_for :preferences, wrapper: :inline_form, url: "/animals",html: { class: "form-inline" },method: "get" do |f| %>
+      <%= f.input :category, collection: category, placeholder: 'All animals', required: false, input_html: { class: "mb-2 mr-sm-2"} %>
+      <%= f.input :price, collection: price, placeholder: 'All prices', required: false, input_html: { class: "mb-2 mr-sm-2"} %>
+      <%= f.button :submit, "Find my animal", class: "btn btn-warning mb-2" %>
+    <% end %>
+    <form>
+      <div class="form-row align-items-center">
+        <div class="form-items">
+          <select class="form-control">
+            <option>All animals</option>
+            <option>Mammal</option>
+            <option>Fish</option>
+            <option>Bird</option>
+          </select>
+        </div>
+        <div class="form-items">
+          <select class="form-control">
+            <option>All prices</option>
+            <option>Less than 50$</option>
+            <option>Between 50$ and 150$</option>
+            <option>Between 150$ and 500$</option>
+            <option>More than 500$</option>
+          </select>
+        </div>
+        <div class="form-items">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+    <!-- <div class="form-group">
+      <select class="form-control">
+        <option>All animals</option>
+        <option>Mammal</option>
+        <option>Fish</option>
+        <option>Bird</option>
+      </select>
+    </div> -->
     <div class="cards">
       <% @animals.each do |animal| %>
 
