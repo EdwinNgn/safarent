@@ -35,11 +35,6 @@ class BookingsController < ApplicationController
     @booking.destroy
   end
 
-  def edit
-    # @booking = Booking.find(params[:id])
-    # @booking[:status] = "accept"
-  end
-
   def accept
     @booking = Booking.find(params[:id])
     @booking[:status] = "accept"
@@ -52,6 +47,13 @@ class BookingsController < ApplicationController
     @booking[:status] = "refuse"
     @booking.save
     redirect_to animal_bookings_path(@booking.animal)
+  end
+
+  def read
+    @booking = Booking.find(params[:id])
+    @booking[:read] = true
+    @booking.save
+    redirect_to profil_path(current_user)
   end
 
 private
