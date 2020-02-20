@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
     @booking.animal = @animal
     if @animal.bookable?(start_date,end_date)
       @booking.save
-      redirect_to(booking_path(@booking))
+      redirect_to booking_path(@booking), alert: "Congrats"
     else
       redirect_to animal_path(@animal), alert: "Already Booked at this period :'("
       #render 'animals/show'
