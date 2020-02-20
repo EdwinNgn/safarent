@@ -32,6 +32,13 @@ class AnimalsController < ApplicationController
   def show
     @animal = Animal.find(params[:id])
     @booking = Booking.new
+    @bookings = Booking.where(animal_id: @animal.id)
+    @bookings_dates = @bookings.map do |booking|
+      {
+        from: booking.start_date,
+        to:   booking.end_date
+      }
+    end
   end
 
   def new

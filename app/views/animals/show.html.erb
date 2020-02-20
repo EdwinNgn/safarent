@@ -95,7 +95,7 @@
     </div>
   </div>
 
-  <div class="container shadow-lg mb-5 mt-5 bg-white rounded-pill booking-form">
+  <div class="container shadow-lg mb-5 mt-5 bg-white rounded-pill booking-form" id="booking-form-div" data-bookings="<%= @bookings_dates.to_json %>">
     <div class="row">
       <div class="col-12">
         <h2>Book <%= @animal.name.capitalize %> now!</h2>
