@@ -17,3 +17,10 @@
 .summary{
   border-bottom: 1px solid rgb(235, 235, 235) !important;
   }
+
+.see-owner-profile > a {
+  color:white;
+  &:hover {
+    text-decoration: none;
+  }
+}
