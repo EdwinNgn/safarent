@@ -95,7 +95,10 @@
                     <%= cl_image_tag(User.find(Booking.find(@animal.reviews[index][:booking_id])[:user_id]).photo.key, crop: :thumb, gravity: :face, class: "profil-pic" ) %>
                     <!-- <img src="https://avatars0.githubusercontent.com/u/57433401?v=4" alt="Paul" class="profil-pic"> -->
                     <div class="review-info">
-                      <h2 class ="user-name"> <%= "#{User.find(  Booking.find(@animal.reviews.last[:booking_id])[:user_id])[:first_name]} #{User.find(  Booking.find(@animal.reviews.last[:booking_id])[:user_id])[:last_name]}" %> </h2>
+                      <div class="d-flex justify-content-between">
+                        <h2 class ="user-name"> <%= "#{User.find( Booking.find(@animal.reviews.last[:booking_id])[:user_id])[:first_name]} #{User.find( Booking.find(@animal.reviews.last[:booking_id])[:user_id])[:last_name]}" %> </h2>
+                        <h6><%= review[:rating] %>/5 <i class="far fa-star"></i></h6>
+                      </div>
                       <p class = "review-description"><%= @animal.reviews[index][:description] %></p>
                     </div>
                   </div>

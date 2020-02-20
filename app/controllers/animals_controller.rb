@@ -82,7 +82,7 @@ class AnimalsController < ApplicationController
         denominateur += 1
       end
     end
-    sum_ratings / denominateur.to_f
+    (sum_ratings / denominateur.to_f).round(1)
   end
 
   def number_of_comments
