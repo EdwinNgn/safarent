@@ -6,6 +6,13 @@
 }
 
 
+.profile-category{
+  h3{
+    text-align: center;
+    margin: 30px 0;
+  }
+}
+
 .card-profile-page {
   position: relative;
   background-size: cover;
@@ -15,7 +22,7 @@
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 5px;
@@ -28,7 +35,9 @@
   text-decoration: none;
   position: absolute;
   top: 0px;
-  right: 0px;
+  right: 5px;
+  font-size: 18px;
+  opacity: 0.8; 
 }
 
 
@@ -37,7 +46,9 @@
   text-decoration: none;
   position: absolute;
   bottom: 0px;
-  right: 0px;
+  right: 5px;
+  font-size: 18px;
+  opacity: 0.8;
 }
 
 .no-decoration {
