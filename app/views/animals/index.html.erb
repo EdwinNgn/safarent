@@ -2,13 +2,13 @@
 
   <!-- Animals cards -->
   <div class="container" >
-    <h1 class ="header"> All animals available in <%= @location %> </h1>
+    <h1 class ="header"> All animals available in <%= @location.capitalize %> </h1>
     <div class="cards">
       <% @animals.each do |animal| %>
 
         <% if animal.photos.attached? %>
           <div class="card-animal">
-            <div class="animal-img" style="background-image: url('<%= cl_image_path animal.photos[0].key %>')"></div>
+            <%= cl_image_tag(animal.photos[0].key, width: 150, height: 150, crop: :thumb, gravity: :face) %>
             <div class="card-animal-infos">
               <div>
                 <h2><%= animal.name %></h2>
