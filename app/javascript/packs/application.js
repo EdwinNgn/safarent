@@ -8,4 +8,9 @@ initMapbox();
 loadDynamicBannerText();
 initMapbox();
 
+// For tabs in index bookings
+$('#myTab a').on('click', function (e) {
+
+  $(this).tab('show')
+})
 

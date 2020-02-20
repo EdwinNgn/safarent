@@ -1,26 +1,73 @@
 
 <div class="container">
-  <h1>My bookings for <%= @animal.name  %></h1>
-
-  <h3> Waiting for approval</h3>
-  <ul>
-    <% @bookings.where(status: "pending").each do |booking|%>
-      <% booking[:read] = true %>
-      <li><%="#{booking.start_date} - #{booking.end_date} "%> -- <%= link_to "Accept", booking_accept_path(booking), method: :patch%> or
-        <%= link_to "Refused", booking_refuse_path(booking), method: :patch%> </li>
-    <% end %>
-  </ul>
-
-  <h3> Validate </h3>
-  <ul>
-  <% @bookings.where(status: "accept").each do |booking|%>
-      <li><%="#{booking.start_date} - #{booking.end_date} "%></li>
-    <% end %>
-  </ul>
-  <h3> Denied </h3>
-  <ul>
-  <% @bookings.where(status: "refuse").each do |booking|%>
-      <li><%="#{booking.start_date} - #{booking.end_date} "%></li>
-    <% end %>
-  </ul>
+  <div class="">
+    <h1>My bookings for <%= @animal.name  %></h1>
+    <ul class="mt-4 nav nav-pills nav-fill bg-white" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Waiting for approval</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Approved</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Refused</a>
+      </li>
+    </ul>
+  </div>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="card mt-5" id="pending">
+        <h3 class="card-header ">Waiting for approval</h3>
+        <div class="card-body">
+          <% @bookings.where(status: "pending").each do |booking|%>
+            <% booking[:read] = true %>
+            <h4 class="card-title mt-3 border-bottom">
+              <%= link_to profil_path(booking.user), class:"no-decoration text-warning font-weight-bolder" do %>
+                <%= booking.user.first_name %>
+              <% end %>
+            </h4>
+            <p class="card-text"><%="From #{booking.start_date} to #{booking.end_date} "%></p>
+            <%= link_to "Accept", booking_accept_path(booking), method: :patch, class:"btn btn-success"%> <%= link_to "Refuse", booking_refuse_path(booking), method: :patch, class:"btn btn-warning"%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <div class="card mt-5" id="approved">
+        <h3 class="card-header ">Approved</h3>
+        <div class="card-body">
+        <% @bookings.where(status: "accept").each do |booking|%>
+          <h4 class="card-title mt-3 border-bottom">
+            <%= link_to profil_path(booking.user), class:"no-decoration text-warning font-weight-bolder" do %>
+              <%= booking.user.first_name %>
+            <% end %>
+          </h4>
+          <p class="card-text"><%="From #{booking.start_date} to #{booking.end_date} "%></p>
+          <%= link_to "Add a review", new_booking_review_path(booking), class:"btn btn-success"  %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+        <div class="card my-5" id="refused">
+          <h3 class="card-header ">Refused</h3>
+          <div class="card-body">
+          <% @bookings.where(status: "refuse").each do |booking|%>
+            <h4 class="card-title mt-3 border-bottom">
+              <%= link_to profil_path(booking.user), class:"no-decoration text-warning font-weight-bolder " do %>
+                <%= booking.user.first_name %>
+              <% end %>
+            </h4>
+            <p class="card-text"><%="From #{booking.start_date} to #{booking.end_date} "%></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+
+
+
