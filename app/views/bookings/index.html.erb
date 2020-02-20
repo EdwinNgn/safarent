@@ -1,23 +1,26 @@
-<h1>My bookings for <%= @animal.name  %></h1>
 
-<h3> Waiting for approval</h3>
-<ul>
-  <% @bookings.where(status: "pending").each do |booking|%>
-    <% booking[:read] = true %>
-    <li><%="#{booking.start_date} - #{booking.end_date} "%> -- <%= link_to "Accept", booking_accept_path(booking), method: :patch%> or
-      <%= link_to "Refused", booking_refuse_path(booking), method: :patch%> </li>
-  <% end %>
-</ul>
+<div class="container">
+  <h1>My bookings for <%= @animal.name  %></h1>
 
-<h3> Validate </h3>
-<ul>
-<% @bookings.where(status: "accept").each do |booking|%>
-    <li><%="#{booking.start_date} - #{booking.end_date} "%></li>
-  <% end %>
-</ul>
-<h3> Denied </h3>
-<% @bookings.where(status: "refuse").each do |booking|%>
-<ul>
-    <li><%="#{booking.start_date} - #{booking.end_date} "%></li>
-  <% end %>
-</ul>
+  <h3> Waiting for approval</h3>
+  <ul>
+    <% @bookings.where(status: "pending").each do |booking|%>
+      <% booking[:read] = true %>
+      <li><%="#{booking.start_date} - #{booking.end_date} "%> -- <%= link_to "Accept", booking_accept_path(booking), method: :patch%> or
+        <%= link_to "Refused", booking_refuse_path(booking), method: :patch%> </li>
+    <% end %>
+  </ul>
+
+  <h3> Validate </h3>
+  <ul>
+  <% @bookings.where(status: "accept").each do |booking|%>
+      <li><%="#{booking.start_date} - #{booking.end_date} "%></li>
+    <% end %>
+  </ul>
+  <h3> Denied </h3>
+  <ul>
+  <% @bookings.where(status: "refuse").each do |booking|%>
+      <li><%="#{booking.start_date} - #{booking.end_date} "%></li>
+    <% end %>
+  </ul>
+</div>

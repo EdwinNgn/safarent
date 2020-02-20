@@ -1,7 +1,5 @@
 
-
-
-
+<!-- Top profile picture and banner -->
 <div class="container">
   <div class="profile-card">
     <img src="<%= cl_image_path @user.photo.key %>" />
@@ -15,10 +13,10 @@
       <% end %>
     </div>
   </div>
+<!--  -->
 
 
-
-
+<!-- Bookings -->
   <% unless @user.bookings.first.nil?  %>
     <div class="profile-category my-booking my-3" id="profile-booking">
       <h3 class="border-bottom">My bookings</h3>
@@ -27,33 +25,37 @@
         <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path booking.animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
           <%= booking.animal.name  %>
 
-          <%# if booking.end_date.to_date < Date.today %>
+          <% if booking.end_date.to_date < Date.today && booking[:status] == "accept  " %>
             <%= link_to new_booking_review_path(booking), class:"no-decoration card-footer" do %>
               Add a review
             <% end %>
-          <%# end %>
+          <% end %>
 
-
-          <p class="card-top">
-            <% diff_day = (booking.end_date.to_date - Date.today).to_i %>
-            <% if diff_day < 0 %>
-              <%= "#{- diff_day} days ago" %>
-            <% elsif diff_day < -30 %>
-              <%= "More than a month ago" %>
+          <div class="card-top">
+            <% if booking[:status] == "refuse" %>
+              <div class="text-danger">Denied</div>
+            <% elsif booking[:status]== "accept" %>
+              <% diff_day = (booking.end_date.to_date - Date.today).to_i %>
+              <% if diff_day < 0 %>
+                <%= "#{- diff_day} days ago" %>
+              <% elsif diff_day < -30 %>
+                <%= "More than a month ago" %>
+              <% else %>
+                <%= "In #{diff_day} days" %>
+              <% end %>
             <% else %>
-              <%= "In #{diff_day} days" %>
+              <div class="text-warning">Pending</div>
             <% end %>
-
-          </p>
-
-
+          </div>
         </div>
       <%end %>
       </div>
     </div>
   <% end %>
+<!--  -->
 
 
+<!-- Animals -->
   <% unless @user.animals.first.nil?  %>
     <div class="profile-category my-animals my-3" id="profile-animal">
       <h3 class="border-bottom">My animals</h3>
@@ -64,15 +66,16 @@
             <%= link_to animal_bookings_path(animal), class:"no-decoration" do %>
               <%= "See bookings for #{animal.name}"  %>
             <% end %>
-
-
             <div class="card-top">
-              <% last_booking = animal.bookings.map{|booking| booking.start_date}.max %>
+              <% last_booking = animal.bookings.where(status: "accept").map{|booking| booking.start_date}.max %>
               <% unless last_booking.nil? %>
                 <% diff_day = (last_booking - Date.today).to_i %>
-                <% if diff_day > 0  %>
+                <% if diff_day > 0 %>
                   <%= "Next booking in #{diff_day} days" %>
                 <% end %>
+              <% end %>
+              <% unless animal.bookings.all?{|booking| booking[:status] != "pending"} %>
+                <div class="text-warning">You have pending bookings</div>
               <% end %>
             </div>
 
@@ -94,7 +97,10 @@
       </div>
     </div>
   <% end %>
+<!--  -->
 
+
+<!-- Ratings -->
   <% unless @user.animals.first.nil? || @user.animals.all?{|animal| animal.reviews.first.nil?} %>
     <div class="p-3 mb-5 rounded">
       <div class="profile-category my-review  d-flex flex-column justify-content-between p-3">
@@ -130,14 +136,5 @@
       </div>
     </div>
   <%end %>
-
-
-
-
-
-
-
-
-
-
+  <!--  -->
 </div>
