@@ -23,7 +23,7 @@
       <% @user.bookings.each do |booking| %>
         <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path booking.animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
           <%= booking.animal.name  %>
-          <% if booking.end_date.to_date < Date.today && booking[:status] == "accept  " %>
+          <% if booking.end_date.to_date < Date.today && booking[:status] == "accept" %>
             <%= link_to new_booking_review_path(booking), class:"no-decoration card-footer" do %>
               Add a review
             <% end %>
@@ -106,6 +106,7 @@
           <div class="reviews">
             <% @user.animals.each do |animal|  %>
               <% animal.reviews.each do |review| %>
+
                 <% if review.review_type == "owner" %>
                   <div class="profile-review">
                     <!-- Code one review here -->
@@ -116,18 +117,20 @@
                       <p class = "review-description"> <%= "#{review.description}" %></p>
                     </div>
                   </div>
-                <% elsif review.review_type == "renter" %>
-                  <div class="profile-review">
-                    <!-- Code one review here -->
-                    <img src="<%= cl_image_path review.booking.user.photo.key %>" alt="review.booking.user.first_name" class="profil-pic">
-                    <div class="review-info">
-                      <h4 class ="user-name"> <%= "#{review.booking.user.first_name} rents to #{@user.first_name}"  %></h4>
-                      <p class = "review-description"><%= "#{review.rating}/5 " %><i class="fas fa-star"></i></p>
-                      <p class = "review-description"> <%= "#{review.description}" %></p>
-                    </div>
-                  </div>
                 <% end %>
               <% end %>
+            <% end %>
+
+            <% Review.where(review_type:"renter").filter{|review_renter| review_renter.booking.user == @user}.each do |review| %>
+              <div class="profile-review">
+                <!-- Code one review here -->
+                <img src="<%= cl_image_path review.booking.animal.user.photo.key %>" alt="review.booking.user.first_name" class="profil-pic">
+                <div class="review-info">
+                  <h4 class ="user-name"> <%= "#{review.booking.animal.user.first_name} rents to #{review.booking.user.first_name}"  %></h4>
+                  <p class = "review-description"><%= "#{review.rating}/5 " %><i class="fas fa-star"></i></p>
+                  <p class = "review-description"> <%= "#{review.description}" %></p>
+                </div>
+              </div>
             <% end %>
           </div>
         </div>
