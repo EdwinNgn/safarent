@@ -43,7 +43,6 @@ class AnimalsController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { animal: animal })
       }
     end
-    console
 
   end
 
