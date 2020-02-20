@@ -1,6 +1,6 @@
 <div class="container">
   <div class="profile-card">
-    <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFZ7Zq70rdi_Q/profile-displayphoto-shrink_200_200/0?e=1585785600&v=beta&t=CtCmGgbjDzvC6xw6StxBbwMrBde2KCRPwnuUZX2Beb4" />
+    <img src="<%= cl_image_path @user.photo.key %>" />
     <div class="profile-card-infos">
       <h2><%= @user.first_name %>  <%= @user.last_name %></h2>
       <p><%= @user.description %></p>
