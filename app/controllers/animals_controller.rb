@@ -2,34 +2,30 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :destroy, :edit, :update]
 
   def index
-    if params[:search].nil?
+    if params[:search].blank?
       if params[:preferences].nil?
-        @animals = Animal.all
-        @location = "Lille"
+        @animals = Animal.geocoded
       else
-        animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%")
+        animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%").geocoded
         @animals = []
         animals_in_location.each do |animal|
           @animals << animal if animal.animal_type == params[:preferences][:category]
         end
       end
-
+    elsif params[:search][:location].blank?
+      @animals = Animal.geocoded
     else
-      @location = (params[:search][:location].nil? ?  "Lille" : params[:search][:location].strip)
-      if params[:search][:start_date].blank? || params[:search][:end_date].blank?
-        @animals = Animal.where("location ILIKE ?", "%#{@location}%")
-
-      else
-        animals_in_location = Animal.where("location ILIKE ?", "%#{@location}%")
-        @animals = []
-        animals_in_location.each do |animal|
-          @animals << animal if animal.bookable?(params[:search][:start_date].to_date,params[:search][:end_date].to_date)
+      @location = params[:search][:location].strip
+      @animals  = Animal.where("location ILIKE ?", "%#{@location}%").geocoded
+      unless params[:search][:start_date].blank? || params[:search][:end_date].blank?
+        @animals = @animals.select do |animal|
+          animal.bookable?(params[:search][:start_date].split("to")[0].to_date,params[:search][:end_date].to_date)
         end
       end
     end
 
-    @animals_geolocations = @animals.geocoded
-    @markers = @animals_geolocations.map do |animal|
+    # @animals_geolocations = @animals.geocoded
+    @markers = @animals.map do |animal|
       {
         lat: animal.latitude,
         lng: animal.longitude,
@@ -49,6 +45,9 @@ class AnimalsController < ApplicationController
         to:   booking.end_date
       }
     end
+
+    @average_rate = average_rating_for_animal
+    @number_of_comments = number_of_comments
   end
 
   def new
@@ -77,6 +76,30 @@ class AnimalsController < ApplicationController
   def destroy
     @animal.destroy
     redirect_to profil_path(current_user)
+  end
+
+  def average_rating_for_animal
+    animal = Animal.find(params[:id])
+    sum_ratings = 0
+    denominateur = 0
+    animal.reviews.each_with_index do |review, index|
+      if review[:review_type] == "animal"
+        sum_ratings += review[:rating]
+        denominateur += 1
+      end
+    end
+    (sum_ratings / denominateur.to_f).round(1)
+  end
+
+  def number_of_comments
+    animal = Animal.find(params[:id])
+    denominateur = 0
+    animal.reviews.each_with_index do |review, index|
+      if review[:review_type] == "animal"
+        denominateur += 1
+      end
+    end
+    denominateur
   end
 
   private

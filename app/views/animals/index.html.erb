@@ -3,7 +3,11 @@
 <% price = ["Less than 50$", "Between 50$ and 200$", "Between 200$ and 500$", "More than 500$"] %>
   <!-- Animals cards -->
   <div class="container" >
-    <h1 class ="header"> All animals available in <%= @location.capitalize %> </h1>
+    <h1 class ="header"> All animals available
+      <% unless @location.blank? %>
+        in <%= @location.capitalize %>
+      <% end %>
+    </h1>
 
     <%= simple_form_for :preferences, wrapper: :inline_form, url: "/animals",html: { class: "form-inline" },method: "get" do |f| %>
       <% unless params[:search].nil? || params[:search][:location].nil? %>

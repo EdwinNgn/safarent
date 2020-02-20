@@ -5,7 +5,7 @@ import rangePlugin from "flatpickr/dist/plugins/rangePlugin"
 
  const bookingForm = document.getElementById('booking-form-div');
 
- if (bookingForm) {
+if (bookingForm) {
   const bookings = JSON.parse(bookingForm.dataset.bookings);
   flatpickr("#range_start", {
     plugins: [new rangePlugin({ input: "#range_end"})],
@@ -15,3 +15,9 @@ import rangePlugin from "flatpickr/dist/plugins/rangePlugin"
     "disable": bookings,
   })
 }
+
+
+flatpickr("#flatpickr", {
+  altInput: true,
+  plugins: [new rangePlugin({ input: "#flatpickr_end"})]
+})
