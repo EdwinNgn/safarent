@@ -2,26 +2,24 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :destroy, :edit, :update]
 
   def index
+    puts "   "
+    p params
     if params[:search].blank?
-      @animals = Animal.all
+      @animals = Animal.geocoded
     elsif params[:search][:location].blank?
-      @animals = Animal.all
+      @animals = Animal.geocoded
     else
       @location = params[:search][:location].strip
-      if params[:search][:start_date].blank? || params[:search][:end_date].blank?
-        @animals = Animal.where("location ILIKE ?", "%#{@location}%")
-
-      else
-        animals_in_location = Animal.where("location ILIKE ?", "%#{@location}%")
-        @animals = []
-        animals_in_location.each do |animal|
-          @animals << animal if animal.bookable?(params[:search][:start_date].to_date,params[:search][:end_date].to_date)
+      @animals  = Animal.where("location ILIKE ?", "%#{@location}%").geocoded
+      unless params[:search][:start_date].blank? || params[:search][:end_date].blank?
+        @animals = @animals.select do |animal|
+          animal.bookable?(params[:search][:start_date].split("to")[0].to_date,params[:search][:end_date].to_date)
         end
       end
     end
 
-    @animals_geolocations = @animals.geocoded
-    @markers = @animals_geolocations.map do |animal|
+    # @animals_geolocations = @animals.geocoded
+    @markers = @animals.map do |animal|
       {
         lat: animal.latitude,
         lng: animal.longitude,
