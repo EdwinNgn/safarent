@@ -39,6 +39,9 @@ class AnimalsController < ApplicationController
         to:   booking.end_date
       }
     end
+
+    @average_rate = average_rating_for_animal
+    @number_of_comments = number_of_comments
   end
 
   def new
@@ -67,6 +70,30 @@ class AnimalsController < ApplicationController
   def destroy
     @animal.destroy
     redirect_to profil_path(current_user)
+  end
+
+  def average_rating_for_animal
+    animal = Animal.find(params[:id])
+    sum_ratings = 0
+    denominateur = 0
+    animal.reviews.each_with_index do |review, index|
+      if review[:review_type] == "animal"
+        sum_ratings += review[:rating]
+        denominateur += 1
+      end
+    end
+    sum_ratings / denominateur.to_f
+  end
+
+  def number_of_comments
+    animal = Animal.find(params[:id])
+    denominateur = 0
+    animal.reviews.each_with_index do |review, index|
+      if review[:review_type] == "animal"
+        denominateur += 1
+      end
+    end
+    denominateur
   end
 
   private
