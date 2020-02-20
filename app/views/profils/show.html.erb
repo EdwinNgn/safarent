@@ -94,7 +94,7 @@
     </div>
   <% end %>
 
-  <% unless @user.animals.first.nil? || @user.animals.first.reviews.first.nil? %>
+  <% unless @user.animals.first.nil? || @user.animals.all?{|animal| animal.reviews.first.nil?} %>
     <div class="p-3 mb-5 rounded">
       <div class="profile-category my-review  d-flex flex-column justify-content-between p-3">
           <h3 class="border-bottom"> My reviews </h3>
@@ -128,7 +128,7 @@
         </div>
       </div>
     </div>
-  <% end %>
+  <%end %>
 
 
 
