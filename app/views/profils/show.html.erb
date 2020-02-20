@@ -19,29 +19,8 @@
 
 
 
-  <ul class="nav nav-pills nav-fill">
-    <li class="nav-item">
-      <a class="nav-link active" href="#profile-booking">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Much longer nav link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
-  </ul>
-
-
-
-
-
-
-
   <% unless @user.bookings.first.nil?  %>
-    <div class="my-booking my-3" id="profile-booking">
+    <div class="profile-category my-booking my-3" id="profile-booking">
       <h3>My bookings</h3>
       <div class="profile-cards">
       <% @user.bookings.each do |booking| %>
@@ -75,7 +54,7 @@
 
 
   <% unless @user.animals.first.nil?  %>
-    <div class="my-animals my-3">
+    <div class="profile-category my-animals my-3" id="profile-animal">
       <h3>My animals</h3>
       <div class="profile-cards">
       <% @user.animals.each do |animal| %>
@@ -86,7 +65,15 @@
             <% end %>
 
 
-
+            <div class="card-top">
+              <% last_booking = animal.bookings.map{|booking| booking.start_date}.max %>
+              <% unless last_booking.nil? %>
+                <% diff_day = (last_booking - Date.today).to_i %>
+                <% if diff_day > 0  %>
+                  <%= "Next booking in #{diff_day} days" %>
+                <% end %>
+              <% end %>
+            </div>
 
             <div class="card-footer ">
               <%= link_to edit_animal_path(animal), class:"no-decoration" do %>
@@ -107,8 +94,8 @@
     </div>
   <% end %>
 
-    <% unless @user.animals.first.nil? || @user.animals.first.reviews.first.nil? %>
-    <div class="my-reviews my-3">
+    <%# unless @user.animals.first.nil? || @user.animals.first.reviews.first.nil? %>
+    <div class="profile-category my-reviews my-3">
       <h3>My reviews</h3>
       <div class="profile-cards">
         <% @user.animals.each do |animal|  %>
@@ -122,6 +109,6 @@
         <% end %>
       </div>
     </div>
-  <% end %>
+  <%# end %>
 
 </div>

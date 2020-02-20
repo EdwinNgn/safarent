@@ -4,8 +4,10 @@ class AnimalsController < ApplicationController
   def index
     if params[:search].blank?
       @animals = Animal.all
+    elsif params[:search][:location].blank?
+      @animals = Animal.all
     else
-      @location = params[:search][:location].blank? ?  "Lille" : params[:search][:location].strip
+      @location = params[:search][:location].strip
       if params[:search][:start_date].blank? || params[:search][:end_date].blank?
         @animals = Animal.where("location ILIKE ?", "%#{@location}%")
 
