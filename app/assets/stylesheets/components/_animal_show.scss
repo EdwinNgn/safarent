@@ -1,13 +1,11 @@
 .animal-show{
-  margin-right: auto !important;
-  padding-left: 24px !important;
-  margin-left: auto !important;
-  width: auto !important;
+  margin-right:  auto !important;
+  padding-left:  24px !important;
+  margin-left:   auto !important;
+  width:         auto !important;
   padding-right: 24px !important;
-  max-width: 1080px !important;
-  display: flex !important;
-  font: arial;
-
+  max-width:     1080px !important;
+  font:          arial;
 }
 
 .info-animal-show {
@@ -23,4 +21,8 @@
   &:hover {
     text-decoration: none;
   }
+}
+
+.total{
+  background-color: rgba(255, 184, 102, 0.5);
 }
