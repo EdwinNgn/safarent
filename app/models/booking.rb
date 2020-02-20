@@ -1,5 +1,5 @@
 class Booking < ApplicationRecord
-  attr_accessor :status, :read
+  # attr_accessor :status, :read
 
   validates :start_date, presence: true
   validates :end_date, presence: true

@@ -23,7 +23,6 @@
       <% @user.bookings.each do |booking| %>
         <div class="card-profile-page" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path booking.animal.photos.first.key, height: 300, width: 400, crop: :fill %>')">
           <%= booking.animal.name  %>
-          <%= link_to "Seen", booking_read_path(booking), method: :patch%> </li>
           <% if booking.end_date.to_date < Date.today && booking[:status] == "accept  " %>
             <%= link_to new_booking_review_path(booking), class:"no-decoration card-footer" do %>
               Add a review
