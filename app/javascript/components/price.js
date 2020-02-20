@@ -6,7 +6,7 @@ if (startDate) {
     const endDate = document.getElementById('range_end');
     const start = new Date(startDate.value);
     const end = new Date(endDate.value);
-    const diffDays = (end - start) / (1000 * 60 * 60 * 24);
+    const diffDays = ((end - start) / (1000 * 60 * 60 * 24)) +1;
     const price = document.getElementById('price');
     const priceString= price.innerText;
     const priceInt = parseFloat(priceString);
