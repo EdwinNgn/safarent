@@ -13,7 +13,7 @@ class AnimalsController < ApplicationController
         animals_in_location = Animal.where("location ILIKE ?", "%#{@location}%")
         @animals = []
         animals_in_location.each do |animal|
-          @animals << animal if animal.bookable?(params[:search][:start_date].to_date,params[:search][:end_date].to_date)
+          @animals << animal if animal.bookable?(params[:search][:start_date].split("to")[0].to_date,params[:search][:end_date].to_date)
         end
       end
     end

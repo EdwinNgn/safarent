@@ -15,3 +15,9 @@ import rangePlugin from "flatpickr/dist/plugins/rangePlugin"
     "disable": bookings,
   })
 }
+
+
+flatpickr("#range_start", {
+  altInput: true,
+  plugins: [new rangePlugin({ input: "#range_end"})]
+})
