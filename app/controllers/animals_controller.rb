@@ -2,10 +2,20 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :destroy, :edit, :update]
 
   def index
-    if params[:search].blank?
-      @animals = Animal.all
+    if params[:search].nil?
+      if params[:preferences].nil?
+        @animals = Animal.all
+        @location = "Lille"
+      else
+        animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%")
+        @animals = []
+        animals_in_location.each do |animal|
+          @animals << animal if animal.animal_type == params[:preferences][:category]
+        end
+      end
+
     else
-      @location = params[:search][:location].blank? ?  "Lille" : params[:search][:location].strip
+      @location = (params[:search][:location].nil? ?  "Lille" : params[:search][:location].strip)
       if params[:search][:start_date].blank? || params[:search][:end_date].blank?
         @animals = Animal.where("location ILIKE ?", "%#{@location}%")
 
