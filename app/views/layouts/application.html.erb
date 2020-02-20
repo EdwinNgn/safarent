@@ -14,7 +14,9 @@
   <body class="mb-0">
     <%= render 'shared/navbar' %>
     <%= render 'shared/alert' %>
-    <%= yield %>
+    <div class="footer-position">
+      <%= yield %>
+    </div>
     <%= render 'shared/footer' %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>

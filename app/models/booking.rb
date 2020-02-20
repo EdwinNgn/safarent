@@ -1,4 +1,6 @@
 class Booking < ApplicationRecord
+  attr_accessor :status, :read
+
   validates :start_date, presence: true
   validates :end_date, presence: true
   belongs_to :user
@@ -8,4 +10,5 @@ class Booking < ApplicationRecord
   def overlaps?(other_start, other_end)
     start_date <= other_end && other_start <= end_date
   end
+
 end

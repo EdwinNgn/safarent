@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   end
   resources :profils, only: [:show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  patch 'bookings/:id/accept', to: "bookings#accept", as: "booking_accept"
+  patch 'bookings/:id/refuse', to: "bookings#refuse", as: "booking_refuse"
 end
