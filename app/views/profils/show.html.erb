@@ -72,11 +72,11 @@
                   <div class="text-warning">Pending</div>
                 <% end %>
               </div>
-              <%# if booking.end_date.to_date < Date.today && booking[:status] == "accept" %>
+              <% if booking.end_date.to_date < Date.today && booking[:status] == "accept" %>
                 <%= link_to new_booking_review_path(booking), class:"no-decoration card-footer-left" do %>
                   Add a review
                 <% end %>
-              <%# end %>
+              <% end %>
 
               <div class="card-footer">
                 <%= mail_to booking.animal.user.email, class:"no-decoration" do %>
