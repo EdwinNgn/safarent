@@ -11,21 +11,29 @@ class ApplicationController < ActionController::Base
   end
 
   def booking_notifications
+    puts "   "
+    puts " Je passe dans booking notifications"
     unless current_user.nil?
-
       notif_owner = []
       current_user.animals.each do |animal|
         notif_owner << animal.bookings.where(status: "pending")
         #notif_owner = true if !animal.bookings.where(status: "pending").to_a.blank?
       end
-      flash[:notice] = "Hey, #{current_user.first_name}. You have pending approval. Let's have a look on your #{view_context.link_to 'your profil', profil_path(current_user)} ;)".html_safe if notif_owner.flatten.any?
+      puts "Est-ce que j'ai des notifs"
+      p notif_owner.flatten.any?
+      p notif_owner
+      p "#{view_context.link_to 'your profil', profil_path(current_user)}"
+      flash.now.alert = "Hey, #{current_user.first_name}. You have pending approval. Let's have a look on your #{view_context.link_to 'your profil', profil_path(current_user)} ;)".html_safe if notif_owner.flatten.any?
 
-      notif_user = current_user.bookings.where(status: "accept", read: false).each do |notif|
+
+
+      booking = current_user
+      notif_user = current_user.bookings.where(status: "accept", read: false).map do |notif|
+        booking = notif
         notif.read = true
         notif.save!
       end
-      flash[:notice] = "Congrats, #{current_user.first_name}. One of your Booking have been Approved. Let's have a look on your #{view_context.link_to 'your profil', profil_path(current_user)} ;)".html_safe if notif_user.any?
+      flash.now.alert = "Congrats, #{current_user.first_name}. One of your Booking have been Approved. Let's have a look on your #{view_context.link_to 'it', booking_path(booking)} ;)".html_safe if notif_user.any?
     end
-    # raise
   end
 end
