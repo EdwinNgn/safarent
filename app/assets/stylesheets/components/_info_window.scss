@@ -1,0 +1,24 @@
+
+
+.window {
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.price-info-window {
+  position: absolute;
+  bottom : -8px;
+  right: -3px;
+  color: orange
+}
+
+.perday-info-window {
+  position: absolute;
+  bottom : -20px;
+  right: -3px;
+  color: orange
+}
+
+

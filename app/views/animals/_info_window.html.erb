@@ -1,2 +1,10 @@
-<h2><%= animal.name %></h2>
-<p><%= animal.location %></p>
+<div class ="rounded-circle">
+  <div class="container window">
+    <h3><%= animal.name %></h3>
+    <%= link_to animal_path(animal) do %>
+      <%= cl_image_tag(animal.photos[0].key, width: 120, height: 120, crop: :thumb, gravity: :face, class:"rounded shadow-lg image m-1") %>
+    <% end %>
+    <h6 class='price-info-window'><%= animal.price_per_day %>€</h6>
+    <h6 class='perday-info-window'>per day</h6>
+  </div>
+</div>
