@@ -31,7 +31,9 @@
 
           <% if animal.photos.attached? %>
             <div class="card-animal">
+              <%= link_to animal_path(animal) do %>
               <%= cl_image_tag(animal.photos[0].key, width: 150, height: 150, crop: :thumb, gravity: :face) %>
+              <% end %>
               <div class="card-animal-infos">
                 <div>
                   <h2><%= animal.name %></h2>
