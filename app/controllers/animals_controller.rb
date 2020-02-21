@@ -4,20 +4,24 @@ class AnimalsController < ApplicationController
   def index
     if params[:search].blank?
       if params[:preferences][:category].blank? && params[:preferences][:price].blank?
+        @location = params[:preferences][:location]
         @animals = Animal.geocoded
       elsif !params[:preferences][:category].blank? && params[:preferences][:price].blank?
+        @location = params[:preferences][:location]
         animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%").geocoded
         @animals = []
         animals_in_location.each do |animal|
           @animals << animal if animal.animal_type == params[:preferences][:category]
         end
       elsif params[:preferences][:category].blank? && !params[:preferences][:price].blank?
+        @location = params[:preferences][:location]
         animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%").geocoded
         @animals = []
         animals_in_location.each do |animal|
           @animals << animal if animal.price_per_day < params[:preferences][:price].to_i
         end
       else
+        @location = params[:preferences][:location]
         animals_in_location = Animal.where("location ILIKE ?", "%#{params[:preferences][:location]}%").geocoded
         @animals = []
         animals_in_location.each do |animal|

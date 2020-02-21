@@ -1,6 +1,6 @@
 <%= simple_form_for @animal do |f| %>
   <%= f.input :name, placeholder: "Tigrou", label: "Your animal's name" %>
-  <%= f.input :animal_type, placeholder: "Felin" %>
+  <%= f.input :animal_type, placeholder: "Felin", collection: ["Mammal", "Fish", "Bird", "Reptile", "Amphibian"] %>
   <%= f.input :species, placeholder: "Tiger" %>
   <%= f.input :description, placeholder: "Tigrou is Winnie the Poo's bestfriend!" %>
   <%= f.input :price_per_day, placeholder: "50€" %>

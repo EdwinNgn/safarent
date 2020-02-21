@@ -5,7 +5,7 @@ const loadDynamicBannerText = () => {
 
   if (bannerElement) {
     new Typed('#banner-typed-text', {
-      strings: ["a Lion ? ", "a Jaguar ?", "a Pingoo ?", "a Kangaroo ?", "an Elephant ?", "or a Pigeon...."],
+      strings: ["a Lion ? ", "a Jaguar ?", "a Pingoo ?", "a Kangaroo ?", "an Elephant ?"],
       typeSpeed: 100,
       loop: true
     });
