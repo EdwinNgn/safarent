@@ -9,6 +9,7 @@
         <%= cl_image_tag(@booking.animal.photos[0].key, class:"img", width: 150, height: 150, crop: :thumb, gravity: :face) %>
         <div class="card-product-infos-booking">
           <h2><%= @booking.animal.name %></h2>
+          <h3><%= @booking.animal.description %></h3>
           <h4>From <%= @booking.start_date %> to <%= @booking.end_date%></h4>
           <p>You pay : <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %>$</p>
         </div>
@@ -22,6 +23,7 @@
         <%= cl_image_tag(@booking.animal.photos[0].key, class:"img", width: 150, height: 150, crop: :thumb, gravity: :face) %>
         <div class="card-product-infos-booking">
           <h2><%= @booking.animal.name %></h2>
+          <h3><%= @booking.animal.description %></h3>
           <h4>From <%= @booking.start_date %> to <%= @booking.end_date%></h4>
           <p>You pay : <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %>$</p>
         </div>
@@ -35,6 +37,7 @@
         <%= cl_image_tag(@booking.animal.photos[0].key, class:"img", width: 150, height: 150, crop: :thumb, gravity: :face) %>
         <div class="card-product-infos-booking">
           <h2><%= @booking.animal.name %></h2>
+          <h3><%= @booking.animal.description %></h3>
           <h4>From <%= @booking.start_date %> to <%= @booking.end_date%></h4>
           <p>Price : <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %>$</p>
         </div>
