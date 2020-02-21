@@ -14,13 +14,16 @@
 
     <% if @animals.count != 0 %>
       <div class="preferences">
+
         <%= simple_form_for :preferences, wrapper: :inline_form, url: "/animals",html: { class: "form-inline" },method: "get" do |f| %>
+          <i class="fas fa-hippo text-warning mr-4"></i>
           <% unless params[:search].nil? || params[:search][:location].nil? %>
             <%= f.input :location, as: :hidden, input_html: { value: params[:search][:location] } %>
           <% end %>
           <%= f.input :category, collection: category, prompt: 'All animals', required: false, input_html: { class: "mb-2 mr-sm-2 custom-select text-warning"} %>
           <%= f.input :price, label: "Less than : 250$", label_html: {class: "text-warning font-weight-bold"}, as: :range, input_html: {id: "price", max: 500, class: "mb-2 mr-sm-2 custom-range"} %>
           <%= f.button :submit, "Find my animal", class: "btn btn-warning mb-2" %>
+          <i class="fas fa-kiwi-bird text-warning ml-4"></i>
         <% end %>
       </div>
       <div class="cards">
