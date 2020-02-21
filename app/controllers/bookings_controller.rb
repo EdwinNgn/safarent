@@ -1,7 +1,8 @@
 class BookingsController < ApplicationController
 
   def index
-    @animal = Animal.find(params[:animal_id])
+    puts "je suis dans l'index"
+    @animal   = Animal.find(params[:animal_id])
     @bookings = Booking.where(animal:@animal).all
   end
 
@@ -37,7 +38,7 @@ class BookingsController < ApplicationController
 
   def accept
     @booking = Booking.find(params[:id])
-    @booking[:status] = "accept"
+    @booking.status = "accept"
     @booking.save
     redirect_to animal_bookings_path(@booking.animal)
   end
@@ -47,13 +48,6 @@ class BookingsController < ApplicationController
     @booking[:status] = "refuse"
     @booking.save
     redirect_to animal_bookings_path(@booking.animal)
-  end
-
-  def read
-    @booking = Booking.find(params[:id])
-    @booking[:read] = true
-    @booking.save
-    redirect_to profil_path(current_user)
   end
 
 private
