@@ -2,11 +2,12 @@
   color: white;
 }
 
-.fas {
+.rotate {
   animation: pulse 1s infinite;
 }
 
-.fas:hover {
+
+.rotate:hover {
   animation: spin 0.5s infinite;
   transform: scale(5)
 }
@@ -28,4 +29,3 @@
     from {transform:rotate(0deg)}
     to {transform:rotate(360deg)}
 }
-
