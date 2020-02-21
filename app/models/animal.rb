@@ -18,4 +18,19 @@ class Animal < ApplicationRecord
     end
     return true
   end
+
+  def stars_number_to_display
+    sum_ratings = 0
+    denominateur = 0
+    self.reviews.each do |review|
+      sum_ratings += review[:rating]
+      denominateur += 1
+    end
+    if denominateur != 0
+      sum_ratings / denominateur
+    else
+      0
+    end
+  end
+
 end

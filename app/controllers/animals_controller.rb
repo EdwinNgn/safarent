@@ -48,6 +48,8 @@ class AnimalsController < ApplicationController
       }
     end
 
+    # @average_rating_for_animal = average_rating_for_animal
+
   end
 
   def show
