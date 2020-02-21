@@ -41,8 +41,19 @@
                 <% else %>
                   <img src="https://images-na.ssl-images-amazon.com/images/G/01/author-pages/no-profile-image-placeholder-na._CB484118601_.png" class="card-animal-user avatar-bordered" />
                 <% end %>
+                <div class = "rating-on-index">
+                  <% if animal.reviews.count != 0 %>
+                    <% animal.stars_number_to_display.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5-animal.stars_number_to_display).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
             </div>
+
 
 
           <% else %>
@@ -60,11 +71,23 @@
                 <% else %>
                   <img src="https://images-na.ssl-images-amazon.com/images/G/01/author-pages/no-profile-image-placeholder-na._CB484118601_.png" class="card-animal-user avatar-bordered" />
                 <% end %>
+                <div class = "rating-on-index">
+                  <% if animal.reviews.count != 0 %>
+                    <% animal.stars_number_to_display.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5-animal.stars_number_to_display).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>
         <% end %>
       </div>
+
+
     <% else %>
       <div class = "mt-5 sorry-no-animals d-flex justify-content-center align-content-center">
         <div><h2 class=""> Sorry we don't have animals in <%= @location.capitalize %> yet...   <i class="fas fa-frown-open"></i></h2></div>
