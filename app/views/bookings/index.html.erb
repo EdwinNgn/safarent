@@ -27,6 +27,7 @@
               <% end %>
             </h4>
             <p class="card-text"><%="From #{booking.start_date} to #{booking.end_date} "%></p>
+            <p class="card-text"><%="Total: #{booking.animal.price_per_day * ((booking.end_date.to_date - booking.start_date.to_date).to_i + 1)}€"%></p>
             <%= link_to "Accept", booking_accept_path(booking), method: :patch, class:"btn btn-success"%> <%= link_to "Refuse", booking_refuse_path(booking), method: :patch, class:"btn btn-warning"%>
           <% end %>
         </div>
@@ -43,6 +44,7 @@
             <% end %>
           </h4>
           <p class="card-text"><%="From #{booking.start_date} to #{booking.end_date} "%></p>
+          <p class="card-text"><%="Total: #{booking.animal.price_per_day * ((booking.end_date.to_date - booking.start_date.to_date).to_i + 1)}€"%></p>
           <%= link_to "Add a review", new_booking_review_path(booking), class:"btn btn-success"  %>
         <% end %>
         </div>
@@ -59,6 +61,7 @@
               <% end %>
             </h4>
             <p class="card-text"><%="From #{booking.start_date} to #{booking.end_date} "%></p>
+            <p class="card-text"><%="Total : #{booking.animal.price_per_day * ((booking.end_date.to_date - booking.start_date.to_date).to_i + 1)}€"%></p>
           <% end %>
         </div>
       </div>
