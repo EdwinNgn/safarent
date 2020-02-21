@@ -1,6 +1,9 @@
+
 <div class="background mb-0">
 <% category = ["Mammal", "Fish", "Bird", "Reptile", "Amphibian"] %>
 <% price = ["Less than 50$", "Between 50$ and 200$", "Between 200$ and 500$", "More than 500$"] %>
+
+
   <!-- Animals cards -->
   <div class="container" >
     <h1 class ="header"> All animals available
@@ -8,51 +11,68 @@
         in <%= @location.capitalize %>
       <% end %>
     </h1>
-    <div class="preferences">
-      <%= simple_form_for :preferences, wrapper: :inline_form, url: "/animals",html: { class: "form-inline" },method: "get" do |f| %>
-        <% unless params[:search].nil? || params[:search][:location].nil? %>
-          <%= f.input :location, as: :hidden, input_html: { value: params[:search][:location] } %>
+
+    <% if @animals.count != 0 %>
+      <div class="preferences">
+        <%= simple_form_for :preferences, wrapper: :inline_form, url: "/animals",html: { class: "form-inline" },method: "get" do |f| %>
+          <% unless params[:search].nil? || params[:search][:location].nil? %>
+            <%= f.input :location, as: :hidden, input_html: { value: params[:search][:location] } %>
+          <% end %>
+          <%= f.input :category, collection: category, prompt: 'All animals', required: false, input_html: { class: "mb-2 mr-sm-2"} %>
+          <%= f.input :price, label: "Less than : 250$", as: :range, input_html: {id: "price", max: 500, class: "mb-2 mr-sm-2"} %>
+          <%= f.button :submit, "Find my animal", class: "btn btn-warning mb-2" %>
         <% end %>
-        <%= f.input :category, collection: category, prompt: 'All animals', required: false, input_html: { class: "mb-2 mr-sm-2"} %>
-        <%= f.input :price, label: "Less than : 250$", as: :range, input_html: {id: "price", max: 500, class: "mb-2 mr-sm-2"} %>
-        <%= f.button :submit, "Find my animal", class: "btn btn-warning mb-2" %>
-      <% end %>
-    </div>
-    <div class="cards">
-      <% @animals.each do |animal| %>
+      </div>
+      <div class="cards">
+        <% @animals.each do |animal| %>
 
-        <% if animal.photos.attached? %>
-          <div class="card-animal">
-            <%= cl_image_tag(animal.photos[0].key, width: 150, height: 150, crop: :thumb, gravity: :face) %>
-            <div class="card-animal-infos">
-              <div>
-                <h2><%= animal.name %></h2>
-                <p><%= animal.animal_type %></p>
-                <%= link_to("details", animal_path(animal)) %>
+          <% if animal.photos.attached? %>
+            <div class="card-animal">
+              <%= cl_image_tag(animal.photos[0].key, width: 150, height: 150, crop: :thumb, gravity: :face) %>
+              <div class="card-animal-infos">
+                <div>
+                  <h2><%= animal.name %></h2>
+                  <p><%= animal.animal_type %></p>
+                  <%= link_to("details", animal_path(animal)) %>
+                </div>
+                <h2 class="card-animal-pricing"><%= animal.price_per_day %>€</h2>
+                <% if animal.user.photo.attached? %>
+                  <%= cl_image_tag(animal.user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "card-animal-user avatar-bordered") %>
+                <% else %>
+                  <img src="https://images-na.ssl-images-amazon.com/images/G/01/author-pages/no-profile-image-placeholder-na._CB484118601_.png" class="card-animal-user avatar-bordered" />
+                <% end %>
               </div>
-              <h2 class="card-animal-pricing"><%= animal.price_per_day %>€</h2>
-              <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-animal-user avatar-bordered" />
             </div>
-          </div>
 
 
-        <% else %>
-          <div class="card-animal">
-            <img src="https://images.unsplash.com/photo-1551972251-12070d63502a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" />
-            <div class="card-animal-infos">
-              <div>
-                <h2><%= animal.name %></h2>
-                <p><%= animal.animal_type %></p>
-                <%= link_to("details", animal_path(animal)) %>
+          <% else %>
+            <div class="card-animal">
+              <img src="https://images.unsplash.com/photo-1551972251-12070d63502a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" />
+              <div class="card-animal-infos">
+                <div>
+                  <h2><%= animal.name %></h2>
+                  <p><%= animal.animal_type %></p>
+                  <%= link_to("details", animal_path(animal)) %>
+                </div>
+                <h2 class="card-animal-pricing"><%= animal.price_per_day %>€</h2>
+                <% if animal.user.photo.attached? %>
+                  <%= cl_image_tag(animal.user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "card-animal-user avatar-bordered") %>
+                <% else %>
+                  <img src="https://images-na.ssl-images-amazon.com/images/G/01/author-pages/no-profile-image-placeholder-na._CB484118601_.png" class="card-animal-user avatar-bordered" />
+                <% end %>
               </div>
-              <h2 class="card-animal-pricing"><%= animal.price_per_day %>€</h2>
-              <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-animal-user avatar-bordered" />
             </div>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+      <div class = "mt-5 sorry-no-animals d-flex justify-content-center align-content-center">
+        <div><h2 class=""> Sorry we don't have animals in <%= @location.capitalize %> yet...   <i class="fas fa-frown-open"></i></h2></div>
+      </div>
+      <div  class = "mt-2 sorry-no-animals d-flex justify-content-center align-content-center"><%= link_to "Back to search", root_path %></div>
+    <% end %>
   </div>
+
 
   <!-- End fo animal cards -->
 
