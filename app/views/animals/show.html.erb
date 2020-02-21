@@ -139,9 +139,11 @@
       <div>
         <h2>Book <%= @animal.name.capitalize %> now!</h2>
         <%= render 'bookings/form', booking: @booking, animal: @animal %>
+        <h1 class="total-price"></h1>
       </div>
     </div>
   </div>
+  <p id="price" style="display:none"><%= @animal.price_per_day %></p>
   <!-- END BOOKING -->
 
 <!-- END info animal -->

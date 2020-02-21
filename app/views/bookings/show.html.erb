@@ -1,25 +1,46 @@
 <div class="container">
-  <h1>Congratulation ! 🎉</h1>
-  <h3 class="recap">Here is your recap :</h3>
-  <% if @booking.animal.photos.attached? %>
-    <div class="card-product-booking">
-      <%= cl_image_tag(@booking.animal.photos[0].key, class:"img", width: 150, height: 150, crop: :thumb, gravity: :face) %>
-      <div class="card-product-infos-booking">
-        <h2><%= @booking.animal.name %></h2>
-        <h4>From <%= @booking.start_date %> to <%= @booking.end_date%></h4>
-        <p>You pay : <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %>$</p>
-      </div>
-    </div>
+  <div class="booking-show">
 
-  <% else %>
-    <div class="card-product-booking">
-      <img src="https://images.unsplash.com/photo-1551972251-12070d63502a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" />
-      <div class="card-product-infos-booking">
-        <h2><%= @booking.animal.name %></h2>
-        <h4>From <%= @booking.start_date %> to <%= @booking.end_date%></h4>
-        <p>You pay : <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %>$</p>
+    <% if @booking.status == "pending" %>
+      <h1>Your booking has been sent to the owner ! 🎉</h1>
+      <h4>You will receive a notification as soon as it is approved! </h4>
+      <h3 class="recap mt-5">Here is your recap :</h3>
+      <div class="card-product-booking">
+        <%= cl_image_tag(@booking.animal.photos[0].key, class:"img", width: 150, height: 150, crop: :thumb, gravity: :face) %>
+        <div class="card-product-infos-booking">
+          <h2><%= @booking.animal.name %></h2>
+          <h4>From <%= @booking.start_date %> to <%= @booking.end_date%></h4>
+          <p>You pay : <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %>$</p>
+        </div>
       </div>
-    </div>
-  <% end %>
-  <h2 class="owner"> Get more info about <%= link_to @booking.animal.user.first_name, profil_path(@booking.animal.user) %></h2>
+      <h2 class="owner"> Get more info about <%= link_to @booking.animal.user.first_name, profil_path(@booking.animal.user) %></h2>
+    <% elsif @booking.status == "accept" %>
+      <h1>Congratulation ! 🎉</h1>
+      <h4>Your booking has been approved!  </h4>
+      <h3 class="recap mt-5">Here is your recap :</h3>
+      <div class="card-product-booking">
+        <%= cl_image_tag(@booking.animal.photos[0].key, class:"img", width: 150, height: 150, crop: :thumb, gravity: :face) %>
+        <div class="card-product-infos-booking">
+          <h2><%= @booking.animal.name %></h2>
+          <h4>From <%= @booking.start_date %> to <%= @booking.end_date%></h4>
+          <p>You pay : <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %>$</p>
+        </div>
+      </div>
+      <h2 class="owner"> Get more info about <%= link_to @booking.animal.user.first_name, profil_path(@booking.animal.user) %></h2>
+    <% else %>
+      <h1>We are sorry 😔</h1>
+      <h4> The owner was not able to meet your request.</h4>
+      <h3 class="recap mt-5">You will not be charged for this booking:</h3>
+      <div class="card-product-booking">
+        <%= cl_image_tag(@booking.animal.photos[0].key, class:"img", width: 150, height: 150, crop: :thumb, gravity: :face) %>
+        <div class="card-product-infos-booking">
+          <h2><%= @booking.animal.name %></h2>
+          <h4>From <%= @booking.start_date %> to <%= @booking.end_date%></h4>
+          <p>Price : <%= ((@booking.end_date - @booking.start_date).to_i + 1) * @booking.animal.price_per_day %>$</p>
+        </div>
+      </div>
+      <p class="owner">  <%=mail_to @booking.animal.user.email, "Contact the owner"%>  </p>
+      <h5> <%= link_to "Let's find you another animal!", "/"  %> </h5>
+    <% end %>
+  </div>
 </div>

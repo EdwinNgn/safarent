@@ -1,7 +1,8 @@
 class BookingsController < ApplicationController
 
   def index
-    @animal = Animal.find(params[:animal_id])
+    puts "je suis dans l'index"
+    @animal   = Animal.find(params[:animal_id])
     @bookings = Booking.where(animal:@animal).all
   end
 
@@ -35,14 +36,9 @@ class BookingsController < ApplicationController
     @booking.destroy
   end
 
-  def edit
-    # @booking = Booking.find(params[:id])
-    # @booking[:status] = "accept"
-  end
-
   def accept
     @booking = Booking.find(params[:id])
-    @booking[:status] = "accept"
+    @booking.status = "accept"
     @booking.save
     redirect_to animal_bookings_path(@booking.animal)
   end

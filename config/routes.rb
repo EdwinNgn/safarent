@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   patch 'bookings/:id/accept', to: "bookings#accept", as: "booking_accept"
   patch 'bookings/:id/refuse', to: "bookings#refuse", as: "booking_refuse"
+  patch 'bookings/:id/unread', to: "bookings#unreaad", as: "booking_unread"
+  patch 'bookings/:id/read', to: "bookings#read", as: "booking_read"
 end
