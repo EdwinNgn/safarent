@@ -7,9 +7,10 @@
 .preferences {
   background-color: rgba(255, 255, 255, 0.7);
   display: flex;
-  padding-top: 5px;
+  padding: 10px 0 5px 0;
+  margin-bottom: 10px;
   justify-content: space-around;
-  width:70%;
+  // width:70%;
   border-radius: 5px;
 }
 
