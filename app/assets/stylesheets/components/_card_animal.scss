@@ -105,7 +105,8 @@
   background-size: 100% 100%;
   display: grid;
   grid-template-columns: 3fr 2fr;
-  grid-gap: 16PX;
+  grid-gap: 16px;
+
 
 }
 
@@ -115,3 +116,9 @@
   position: sticky;
   top: 80px;
 }
+
+.sorry-no-animals {
+  font-weight: bold;
+  color:white
+}
+
